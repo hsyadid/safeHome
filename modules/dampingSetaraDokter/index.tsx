@@ -1,4 +1,5 @@
 import { DoctorCard } from "@/../components/ui/doctorCard";
+import Pagination from "../../components/ui/pagination";
 
 export const DampingSetara = () => {
   const doctors = [
@@ -79,6 +80,7 @@ export const DampingSetara = () => {
           />
         ))}
       </div>
+      <Pagination/>
     </div>
   );
 }; 
