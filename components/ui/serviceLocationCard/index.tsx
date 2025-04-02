@@ -20,7 +20,7 @@ export const ServiceLocationCard = ({
   className
 }: ServiceLocationCardProps) => {
   return (
-    <div className={`bg-white rounded-[15px] overflow-hidden shadow-sm border-gray-100 border-2 border-solid border-[##D5D3D4] ${className}`}>
+    <div className={`bg-[#efeee6] rounded-[15px] overflow-hidden shadow-sm border-gray-100 border-2 border-solid border-[##D5D3D4] ${className}`}>
 
       <div className="w-full h-[180px] relative">
         <Image 

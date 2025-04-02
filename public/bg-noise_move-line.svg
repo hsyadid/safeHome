@@ -1,0 +1,25 @@
+<svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 213.83 300.5" width="213.83" height="300.5">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke-width: 0px;
+      }
+
+      .cls-1, .cls-2 {
+        opacity: .25;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #fff;
+        stroke-dasharray: 0 0 1 2;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" x="212.83" width="1" height="300.5"/>
+  <path class="cls-2" d="m106.67,0v299.5"/>
+  <path class="cls-2" d="m0,150h212.83"/>
+  <rect class="cls-1" y="299.5" width="213.83" height="1"/>
+</svg>

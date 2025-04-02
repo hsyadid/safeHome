@@ -26,9 +26,13 @@ export const Navbar = () => {
     };
   }, []);
 
+  const handleDampingSetaraClick = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
     <>
-      <div className={`bg-white w-full h-[76px] flex justify-between items-center px-10 z-[999] ${isScrolled ? 'fixed top-0' : 'relative shadow-lg shadow-red-100'} transition-all duration-300`}>
+      <div className={`bg-[#f0eee4] w-full h-[76px] flex justify-between items-center px-10 z-[999] ${isScrolled ? 'fixed top-0' : 'relative shadow-lg shadow-black/10'} transition-all duration-300`}>
         <div>
           <Image
             src={logo}
@@ -62,9 +66,12 @@ export const Navbar = () => {
             </li>
             <li 
               className="font-jakarta font-semibold text-xl hover:text-primary cursor-pointer flex items-center gap-2"
-              onClick={() => setIsModalOpen(true)}
+              onClick={handleDampingSetaraClick}
             >
-              Damping Setara <FaChevronDown className="text-gray-400"/>
+              Damping Setara 
+              <FaChevronDown className={`text-gray-400 transition-transform duration-300 ${
+                isModalOpen ? 'rotate-180' : ''
+              }`}/>
             </li>
           </ul>
 

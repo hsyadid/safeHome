@@ -3,6 +3,7 @@ import close from "../../../public/close.svg"
 import Form from "next/form"
 import Dropdown from "../dropdown"
 import { ChildProps } from "postcss"
+import { useEffect } from "react"
 
 type ForumPostModalProps = {
   onIncrement: () => void;
@@ -10,9 +11,18 @@ type ForumPostModalProps = {
 };
 
 export default function ForumPostModal({onIncrement, profileUrl}:ForumPostModalProps) {
+  useEffect(() => {
+    // Prevent scrolling on mount
+    document.body.style.overflow = 'hidden';
+    // Re-enable scrolling on unmount
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
 
   return(
-    <div>
+    <>
+      <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={onIncrement} />
       <div className="bg-white px-4 pt-4 pb-8 rounded-2xl w-fit fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:w-[600px]">
         <Image 
           src={close}
@@ -53,7 +63,6 @@ export default function ForumPostModal({onIncrement, profileUrl}:ForumPostModalP
           </div>
         </Form>
       </div>
-
-    </div>
+    </>
   )
 }
