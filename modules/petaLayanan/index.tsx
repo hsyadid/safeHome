@@ -55,7 +55,7 @@ export const PetaLayanan = () => {
   ];
 
   return (
-    <div className="container mx-auto px-16 py-12">
+    <div className="mx-auto px-4 md:px-16 py-12">
 
       <div className="mb-8 space-y-1">
         <h1 className="text-5xl font-bold font-jakarta pb-3">Peta Layanan</h1>
@@ -65,8 +65,7 @@ export const PetaLayanan = () => {
           <p>Jl. Ganesa No.10, Lb. Siliwangi, Kecamatan Coblong, Kota Bandung, Jawa Barat 40132</p>
         </div>
       </div>
-
-      <div className="grid grid-cols-4 gap-6">
+      <div className="flex justify-center md:justify-start flex-wrap gap-6 w-full">
         {locations.map((location, index) => (
           <ServiceLocationCard
             key={index}
@@ -75,7 +74,6 @@ export const PetaLayanan = () => {
             address={location.address}
             phone={location.phone}
             email={location.email}
-            className="w-full"
           />
         ))}
       </div>

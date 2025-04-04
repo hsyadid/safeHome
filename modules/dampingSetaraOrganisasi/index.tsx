@@ -37,14 +37,14 @@ export const LayananHukum = () => {
   ];
 
   return (
-    <div className="container mx-auto px-16 py-12">
+    <div className=" mx-auto px-16 py-12">
 
       <div className="mb-8">
         <h1 className="text-5xl font-bold font-jakarta mb-2">Damping Setara</h1>
         <p className="text-lg text-gray-600">Layanan Hukum</p>
       </div>
 
-      <div className="grid grid-cols-4 gap-6">
+      <div className="flex flex-wrap gap-4 justify-center md:justify-start">
         {lawFirms.map((firm, index) => (
           <LawFirmCard
             key={index}

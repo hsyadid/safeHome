@@ -13,7 +13,38 @@ const forumPosts = [
     role: "buddy",
     date: "2 jam yang lalu",
     text: "ya allah gue capek banget masa ini tugas ga kelar kelar padahal udah mau lebaran ya allah kenapa aku masuk itb plis gue pengen pindah aja jir harusnya gue kmrn keterima di unpad aja",
-    publicity: "private"
+    publicity: "private",
+    replies: [{
+      id: 1,
+      profileUrl: "/okegas.jpg",
+      name: "Hubban",
+      role: "buddy",
+      date: "2 jam yang lalu",
+      text: "woi lu mikir lah ini gajelas banget",
+      publicity: "private",
+      replies: null
+    },
+    {
+      id: 1,
+      profileUrl: "/okegas.jpg",
+      name: "Ridwan Kamil",
+      role: "buddy",
+      date: "2 jam yang lalu",
+      text: "hayang dahar aing",
+      publicity: "private",
+      replies: [{
+        id: 1,
+        profileUrl: "/okegas.jpg",
+        name: "Hubban",
+        role: "buddy",
+        date: "2 jam yang lalu",
+        text: "arti?",
+        publicity: "private",
+        replies: null
+      },]
+    }
+  ], 
+    
   },
   {
     id: 2,
@@ -22,7 +53,8 @@ const forumPosts = [
     role: "survivor",
     date: "5 jam yang lalu",
     text: "Hari ini aku akhirnya berani cerita ke psikolog tentang masalahku. Ternyata memang benar kata teman-teman, berbagi cerita itu membantu meringankan beban.",
-    publicity: "public"
+    publicity: "public",
+    replies: null
   },
   {
     id: 3,
@@ -31,9 +63,10 @@ const forumPosts = [
     role: "buddy",
     date: "1 hari yang lalu",
     text: "Sharing pengalaman nih, kemarin aku nemuin komunitas support yang bagus banget. Mereka punya program pendampingan yang comprehensive.",
-    publicity: "private"
+    publicity: "private",
+    replies: null
   }
-] as const;
+];
 
 export default function Forum(){
   const [modal, showModal] = useState(false)
@@ -70,16 +103,18 @@ export default function Forum(){
             </div>
         </div>
 
-        <div className="px-2 md:px-12">
-          {forumPosts.map((post) => (
+        <div>
+          {forumPosts && forumPosts.map((post) => (
             <ForumPost
               key={post.id}
+              id = {post.id}
               profileUrl={post.profileUrl}
               name={post.name}
               role={post.role}
               date={post.date}
               text={post.text}
               publicity={post.publicity}
+              replies={post.replies}
             />
           ))}
         </div>

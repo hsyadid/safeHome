@@ -23,7 +23,7 @@ export const SectionTitle = ({
 }: SectionTitleProps) => {
     return (
         <div className="flex flex-col gap-5">
-            <div className={`space-y-2 w-[680px] ${className}`}>
+            <div className={`space-y-2 ${className}`}>
                 <h2 className={`font-jakarta ${titleClassName}`}>
                     {title}
                 </h2>
@@ -49,12 +49,12 @@ export const SectionTitleHero = ({
 }: SectionTitleHeroProps) => {
     return (
         <div className={`flex flex-col justify-center items-center gap-5 ${className}`}>
-            <div className={`space-y-3 text-center flex flex-col justify-center items-center `}>
-                <h2 className={`font-jakarta w-[730px] h-fit font-bold text-7xl tracking-wide`}>
-                    SafeHome: Pulang ke <span className="bg-gradient-to-r from-[#4f1818] via-[#662D91] to-[#005e81] inline-block text-transparent bg-clip-text h-[82px] "> Ruang Amanmu </span>
+            <div className={`gap-3 text-center flex flex-col justify-center items-center `}>
+                <h2 className={`font-jakarta  h-fit font-bold text-3xl md:text-6xl lg:text-7xl tracking-wide`}>
+                    SafeHome: Pulang <br></br> ke <span className="bg-gradient-to-r from-[#4f1818] via-[#662D91] to-[#005e81] text-transparent bg-clip-text"> Ruang Amanmu </span>
                 </h2>
                 {description && (
-                    <p className={`font-jakarta text-gray-600 ${descClassName}  w-[650px]`}>
+                    <p className={`font-jakarta text-gray-600 ${descClassName}  max-w-[650px]`}>
                         {description}
                     </p>
                 )}

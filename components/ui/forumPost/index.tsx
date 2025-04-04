@@ -1,31 +1,40 @@
 import Image from "next/image"
 import Flag from "../../../public/Flag.svg"
 import chevronDown from "../../../public/chevron-down.svg"
+import { list } from "postcss";
+import { List } from "postcss/lib/list";
+import { useState } from "react";
+import { Item } from "@radix-ui/react-accordion";
 
 interface ForumPostProps {
+    id: number;
     profileUrl: string;
     name: string;
     role: string;
     date: string;
     text: string;
-    publicity: 'public' | 'private';
+    publicity: "public" | "private";
+    replies: ForumPostProps[] | null;
 }
 
 export default function ForumPost({
+    id,
     profileUrl,
     name,
     role,
     date,
     text,
-    publicity
+    publicity,
+    replies
 }: ForumPostProps) {
     const publicityStyles = {
         public: 'bg-[#d6d3d3] text-[#2d2b2e]',
         private: 'bg-[#ad8861] text-white'
     }
 
+    const [isReplyOpen, setIsReplyOpen] = useState(false);
     return (
-        <div className="font-jakarta flex flex-col gap-4 py-8 border-b-[1px] border-b-[#8E8E8E]">
+        <div className="font-jakarta flex flex-col gap-4 py-8 border-b-[1px] border-b-[#8E8E8E] px-2 md:px-12">
             <div className="flex justify-between items-center">
                 <div className="flex gap-4 items-center">
                     <div className="relative overflow-hidden rounded-full flex h-10 w-10">
@@ -59,7 +68,7 @@ export default function ForumPost({
             </div>
             <p>{text}</p>
             <p className="text-lg font-bold">Balas Postingan</p>
-            <p className="inline-flex items-center text-[#4F1718] font-bold text-lg gap-2">
+            <p className="inline-flex items-center text-[#4F1718] font-bold text-lg gap-2" onClick={()=>isReplyOpen ? setIsReplyOpen(false) : setIsReplyOpen(true)}>
                 <span className="h-6 w-6 relative">
                     <Image 
                         src={chevronDown}
@@ -68,8 +77,22 @@ export default function ForumPost({
                         className="object-cover"
                     />
                 </span>
-                4 balasan
+                {replies && replies.length || 0} balasan
             </p>
+            <div className="border-l-[1px] border-[#4F1718]">
+            {isReplyOpen && replies && replies.map((item) => (
+                    <ForumPost
+                        id={item.id}
+                        profileUrl={item.profileUrl}
+                        name={item.name}
+                        role={item.role}
+                        date={item.date}
+                        text={item.text}
+                        publicity={item.publicity}
+                        replies={item.replies}
+                    />
+                ))}
+            </div>
         </div>
     )
 }

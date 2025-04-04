@@ -34,10 +34,10 @@ export default function InformasiModal({ onClose, profileUrl }: InformasiModalPr
   return (
     <>
       <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={onClose} />
-      <div className="fixed top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] max-h-[85vh] bg-white rounded-[24px] flex flex-col z-[60]">
-        <div className="flex justify-between items-center p-6 border-b border-gray-100">
-          <div className="flex items-center gap-4">
-            <div className="relative w-12 h-12 rounded-full overflow-hidden">
+      <div className="fixed top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[300px] max-w-[600px] max-h-[85vh] bg-white rounded-[24px] flex flex-col z-[60]">
+        <div className="flex justify-between items-center p-6 border-b border-gray-100 gap-4">
+          <div className="flex items-center gap-8">
+            <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0">
               <Image
                 src={profileUrl}
                 alt="profile"
@@ -46,7 +46,7 @@ export default function InformasiModal({ onClose, profileUrl }: InformasiModalPr
                 className="object-cover"
               />
             </div>
-            <h2 className="text-2xl font-medium">Apa yang ingin kamu bagikan?</h2>
+            <h2 className="text-xl md:text-2xl font-medium">Apa yang ingin kamu bagikan?</h2>
           </div>
           <button onClick={onClose}>
             <Image src={close} alt="close" width={24} height={24} />

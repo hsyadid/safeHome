@@ -24,11 +24,7 @@ export const DampingSetaraModal = ({ isOpen, onClose }: DampingSetaraModalProps)
   }, [isOpen]);
 
   return (
-    <div className={`fixed inset-0 z-50 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-300`}>
-
-      <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
-      
-      <div className="fixed top-[63px] right-[120px] flex justify-center">
+      <div className={`absolute top-12 md:top-24 right-1 lg:right-[120px] flex justify-center ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'} `}>
         <div 
           className={`bg-[#f0eee4] rounded-[20px] p-6 w-[250px] space-y-4 shadow-lg 
             transform transition-all duration-300 origin-top
@@ -60,6 +56,5 @@ export const DampingSetaraModal = ({ isOpen, onClose }: DampingSetaraModalProps)
           </div>
         </div>
       </div>
-    </div>
   );
 }; 

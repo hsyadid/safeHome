@@ -36,13 +36,13 @@ export const Homepage = () => {
             <div className="content-container">
                 <div className="w-full h-fit overflow-x-hidden flex flex-col gap-16">
 
-                    <div className=" w-full h-[120vh] px-16 py-16 flex flex-col justify-between items-center relative grid_pattern">
+                    <div className=" w-full h-[500px] md:h-[700px] lg:h-[900px] px-4 md:px-16 py-10 md:py-16 flex flex-col justify-between items-center relative grid_pattern">
                         <SectionTitleHero className="z-10"
                         description="Kamu tidak sendirian. Di sini, kamu bisa menemukan bantuan, dukungan, dan informasi terkait kekerasan berbasis gender (KBG). Akses layanan dengan cepat, tanpa ribet!"
                         descClassName="font-light text-sm"
                         />
                         
-                        <div className="w-full absolute -top-20 ">
+                        <div className="w-full absolute top-60 md:top-28 xl:-top-20 ">
                            <Image
                                src={hand2hand}
                                alt="gambar_hero"
@@ -55,16 +55,14 @@ export const Homepage = () => {
                     </div>
 
                     <div className="w-full flex flex-col gap-16">
-                        <div className=" flex items-center justify-between w-full h-fit px-16 py-12  ">
+                        <div className="gap-4 flex flex-col md:flex-row items-center justify-between w-full h-fit px-4 md:px-16 py-12  ">
                             <Image
-                                    src={example}
-                                    alt="gambar_hero"
-                                    width={550}
-                                    height={400}
-                                    className="rounded-[25px] h-[400px]"
-                                />
-
-
+                                src={example}
+                                alt="gambar_hero"
+                                width={550}
+                                height={400}
+                                className="rounded-[25px] md:w-1/2"
+                            />
                             <SectionTitle
                             title="Peta Layanan Terdekat"
                             description="Temukan bantuan hukum, medis, dan polisi di Lombok lewat peta interaktif ini."
@@ -73,7 +71,7 @@ export const Homepage = () => {
                             />
                         </div>
 
-                        <div className=" flex items-center justify-between w-full h-fit px-16 py-12  ">
+                        <div className="flex gap-4 flex-col-reverse md:flex-row items-center justify-between w-full h-fit px-4 md:px-16 py-12  ">
                             <SectionTitle
                             title="Damping Setara: Teman Seperjalanan"
                             description="Masa sulit tak harus dilalui sendiri. Damping Setara hadir dengan konseling dan bantuan hukum."
@@ -86,17 +84,17 @@ export const Homepage = () => {
                                     alt="gambar_hero"
                                     width={550}
                                     height={400}
-                                    className="rounded-[25px] h-[400px]"
+                                    className="rounded-[25px] md:w-1/2"
                                 />
                         </div>
 
-                        <div className="px-52 py-12 flex-col flex  gap-8 w-full">
-                            <div className="text-center space-y-3 font-jakarta px-10">
+                        <div className="justify-center py-12 flex-col flex px-4 gap-8 w-full">
+                            <div className="text-center space-y-3 font-jakarta md:px-10">
                                 <h2 className="font-bold text-4xl">Apa Kata Mereka?</h2>
                                 <p className="text-lg font-thin">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem autem quae ipsum neque quidem fuga mollitia sint atque, ad quam doloribus labore hic tempora ea, voluptas cumque quisquam repellat magni.</p>
                             </div>
 
-                            <div className=" flex gap-5">
+                            <div className="flex flex-col md:flex-row items-center justify-center gap-5">
                                 <TestimonialCard
                                     name="Nama Testi"
                                     role="Apalah"
@@ -118,25 +116,24 @@ export const Homepage = () => {
                             </div>
                         </div>
 
-                        <div className=" w-full px-52 py-16 flex-col flex gap-8 justify-center items-center relative overflow-hidden">
+                        <div className=" w-full px-4 md:px-16 py-16 flex-col flex gap-8 justify-center items-center relative overflow-hidden">
 
-                            <div className="relative w-[120%] h-[450px] z-10 p-14 bg-gradient-to-r from-[#4f1818] to-[#263452] overflow-hidden rounded-[24px] flex justify-center items-center">
-                                <div className="flex w-full gap-8">
-                                    <div className="text-left w-[55%] font-jakarta px-10 space-y-4">
-                                        <h2 className="font-bold text-[42px] text-[#fcfbfb]">Tentang Anara Indonesia</h2>
-                                        <p className="text-2xl font-thin text-[#fcfbfb]">
+                            <div className="relative z-10 py-8 bg-gradient-to-r from-[#4f1818] to-[#263452] overflow-hidden rounded-[24px] flex justify-center items-center">
+                                <div className="flex flex-col justify-around lg:flex-row w-full gap-8 px-4">
+                                    <div className="text-left lg:w-[55%] font-jakarta px-10 space-y-4">
+                                        <h2 className="font-bold text-4xl lg:text-5xl text-[#fcfbfb]">Tentang Anara Indonesia</h2>
+                                        <p className="text-lg lg:text-2xl font-thin text-[#fcfbfb]">
                                             Safe Home merupakan inisiatif dari <span className="font-bold">Anara Indonesia</span> dengan dukungan program Youth Empowerment Fund yang disponsori oleh European Union. Kami hadir dengan misi memastikan akses perlindungan dan pemulihan yang mudah, aman, dan terpercaya untukmu.
                                         </p>
                                     </div>
-
                                     <div className="flex flex-col  gap-3 justify-center items-center">
                                         <div className="flex gap-5 w-fit justify-center bg-[#fcfbfb] backdrop-blur-sm border-rose-300 border-[1px] rounded-[24px] p-6">
                                             <Image
                                                 src={logo}
                                                 alt="gambar_hero"
-                                                width={200}
-                                                height={200}
-                                                className="rounded-[25px] h-[200px]"
+                                                width={180}
+                                                height={180}
+                                                className="rounded-[25px]"
                                             />
                                             <Image
                                                 src={EU_funding_logo}
@@ -145,16 +142,16 @@ export const Homepage = () => {
                                                 height={200}
                                             />
                                         </div>
-                                        <p className="font-jakarta font-bold text-xl text-[#fcfbfb]">💜 Karena setiap orang berhak merasa aman.</p>
+                                        <p className="font-jakarta font-bold md:text-xl text-[#fcfbfb] text-nowrap">💜 Karena setiap orang berhak merasa aman.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className=" w-full px-52 py-16 flex-col flex gap-8 justify-center items-center">
+                        <div className=" w-full px-4 py-16 flex-col flex gap-8 justify-center items-center">
                             
                             <h1 className="font-medium text-4xl">Frequently Asked Questions</h1>
-                            <div className="w-[77%] px-10 ">
+                            <div className="w-full max-w-[800px]">
                                 <Accordion type="single" collapsible className="w-full">
                                     <AccordionItem value="item-1" className="border-y py-3">
                                         <AccordionTrigger className="text-2xl font-normal">Apa itu Safe Home?</AccordionTrigger>

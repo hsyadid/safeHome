@@ -12,7 +12,7 @@ export const LawFirmCard = ({
   className
 }: LawFirmCardProps) => {
   return (
-    <div className={`bg-white rounded-[15px] overflow-hidden shadow-sm border-2 border-solid border-[##D5D3D4] ${className}`}>
+    <div className={`bg-white w-[300px] rounded-[15px] overflow-hidden shadow-sm border-2 border-solid border-[##D5D3D4] ${className}`}>
 
       <div className="w-full h-[180px] relative bg-black">
         <Image 
