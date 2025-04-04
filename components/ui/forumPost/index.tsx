@@ -68,13 +68,13 @@ export default function ForumPost({
             </div>
             <p>{text}</p>
             <p className="text-lg font-bold">Balas Postingan</p>
-            <p className="inline-flex items-center text-[#4F1718] font-bold text-lg gap-2" onClick={()=>isReplyOpen ? setIsReplyOpen(false) : setIsReplyOpen(true)}>
+            <p className="inline-flex items-center select-none text-[#4F1718] font-bold text-lg gap-2" onClick={()=>isReplyOpen ? setIsReplyOpen(false) : setIsReplyOpen(true)}>
                 <span className="h-6 w-6 relative">
                     <Image 
                         src={chevronDown}
                         alt="dropdown"
                         fill
-                        className="object-cover"
+                        className={`object-cover ${isReplyOpen && "rotate-180"} transition-transform`}
                     />
                 </span>
                 {replies && replies.length || 0} balasan
@@ -82,6 +82,7 @@ export default function ForumPost({
             <div className="border-l-[1px] border-[#4F1718]">
             {isReplyOpen && replies && replies.map((item) => (
                     <ForumPost
+                        key={item.id}
                         id={item.id}
                         profileUrl={item.profileUrl}
                         name={item.name}
