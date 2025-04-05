@@ -1,7 +1,9 @@
 import Informasi from "../../../modules/informasi"
 
-export default function() {
+export default function InformasiPage() {
   return (
     <Informasi/>
   )
 }
+
+InformasiPage.displayName = 'InformasiPage';

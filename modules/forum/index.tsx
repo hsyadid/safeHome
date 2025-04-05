@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image"
-import ForumPost from "../../components/ui/forumPost"
+import ForumPost, { ForumPostProps } from "../../components/ui/forumPost"
 import plus from "../../public/plus.svg"
 import ForumPostModal from "../../components/ui/forumPostModal"
 import { useState } from "react"
@@ -113,8 +113,8 @@ export default function Forum(){
               role={post.role}
               date={post.date}
               text={post.text}
-              publicity={post.publicity}
-              replies={post.replies}
+              publicity={post.publicity as "public" | "private"}
+              replies={post.replies as ForumPostProps[] | null}
             />
           ))}
         </div>

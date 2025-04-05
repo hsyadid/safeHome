@@ -10,7 +10,7 @@ interface InformasiModalProps {
 
 export default function InformasiModal({ onClose, profileUrl }: InformasiModalProps) {
   const [activeTab, setActiveTab] = useState<'artikel' | 'video'>('artikel');
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   useEffect(() => {

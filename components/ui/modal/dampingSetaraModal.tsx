@@ -1,7 +1,6 @@
 'use client'
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
-import { FaChevronDown } from "react-icons/fa";
+import {  useEffect } from "react";
 
 interface DampingSetaraModalProps {
   isOpen: boolean;

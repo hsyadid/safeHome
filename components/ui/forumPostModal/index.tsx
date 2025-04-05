@@ -2,19 +2,16 @@ import Image from "next/image"
 import close from "../../../public/close.svg"
 import Form from "next/form"
 import Dropdown from "../dropdown"
-import { ChildProps } from "postcss"
 import { useEffect } from "react"
 
-type ForumPostModalProps = {
+interface ForumPostModalProps {
   onIncrement: () => void;
   profileUrl: string;
-};
+}
 
 export default function ForumPostModal({onIncrement, profileUrl}:ForumPostModalProps) {
   useEffect(() => {
-    // Prevent scrolling on mount
     document.body.style.overflow = 'hidden';
-    // Re-enable scrolling on unmount
     return () => {
       document.body.style.overflow = 'unset';
     };

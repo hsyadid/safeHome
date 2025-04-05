@@ -1,7 +1,9 @@
 import Daftar from "../../../modules/daftar";
 
-export default function() {
+export default function DaftarPage() {
   return (
     <Daftar/>
   )
 }
+
+DaftarPage.displayName = 'DaftarPage';

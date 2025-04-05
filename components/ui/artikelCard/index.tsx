@@ -1,9 +1,16 @@
 import Image from "next/image"
 
-export default function({imgPath, title, isVideo, link} : {imgPath:string, title:string, isVideo:boolean, link:string}) {
+interface ArtikelCardProps {
+  imgPath: string;
+  title: string;
+  isVideo: boolean;
+  link: string;
+}
+
+export function ArtikelCard({ imgPath, title, isVideo, link }: ArtikelCardProps) {
   return (
     <a href={link}>
-      <div className=" flex rounded-[2rem] border-[1px] border-[#8E8E8E] overflow-hidden">
+      <div className="flex rounded-[2rem] border-[1px] border-[#8E8E8E] overflow-hidden">
         <div className="rounded-l-[calc(2rem-1px)] relative w-[10rem] md:w-[25rem] aspect-[4/3] overflow-hidden">
           <Image 
             src={imgPath} 
@@ -36,3 +43,6 @@ export default function({imgPath, title, isVideo, link} : {imgPath:string, title
     </a>
   )
 }
+
+ArtikelCard.displayName = 'ArtikelCard';
+export default ArtikelCard;
