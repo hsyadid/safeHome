@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=mysql://root:password@db:3306/safehome
+      - NODE_ENV=production
+    depends_on:
+      - db
+    networks:
+      - safehome-network
+
+  db:
+    image: mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=safehome
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - safehome-network
+
+networks:
+  safehome-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
