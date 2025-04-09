@@ -40,7 +40,7 @@ export const LayananHukum = () => {
     <div className=" mx-auto px-16 py-12">
 
       <div className="mb-8">
-        <h1 className="text-5xl font-bold font-jakarta mb-2">Damping Setara</h1>
+        <h1 className="text-4xl md:text-5xl font-bold font-jakarta mb-2">Damping Setara</h1>
         <p className="text-lg text-gray-600">Layanan Hukum</p>
       </div>
 

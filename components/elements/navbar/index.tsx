@@ -33,56 +33,6 @@ export const Navbar = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const SideBar=()=>
-    (
-      <div className="fixed top-0 right-0 w-60 bg-[#f0eee4] h-dvh z-[9999] shadow-md">
-        <div className="h-[76px] flex justify-end px-10">
-          <Image
-            src={close}
-            alt="logo"
-            width={30}
-            height={30}
-            onClick={() => setIsSidebarOpen(false)}
-            />
-        </div>
-        <ul className="flex flex-col gap-4 px-4 mt-8">
-            <li>
-              <Link href="/" className="font-jakarta font-semibold text-xl hover:text-primary cursor-pointer">
-                Beranda
-              </Link>
-            </li>
-            <li>
-              <Link href="/peta-layanan" className="font-jakarta font-semibold text-xl hover:text-primary cursor-pointer">
-                Peta Layanan
-              </Link>
-            </li>
-            <li>
-              <Link href="/forum" className="font-jakarta font-semibold text-xl hover:text-primary cursor-pointer">
-                Forum
-              </Link>
-            </li>
-            <li>
-              <Link href="/informasi" className="font-jakarta font-semibold text-xl hover:text-primary cursor-pointer">
-                Informasi
-              </Link>
-            </li>
-            <li 
-              className="font-jakarta font-semibold text-xl hover:text-primary cursor-pointer flex items-center gap-2 relative"
-              onClick={handleDampingSetaraClick}
-            >
-              Damping Setara 
-              <FaChevronDown className={`text-gray-400 transition-transform duration-300 ${
-                isModalOpen ? 'rotate-180' : ''
-              }`}/>
-              <DampingSetaraModal 
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-              />
-            </li>
-          </ul>
-      </div>
-    )
-
   return (
     <>
       <div className={`bg-[#f0eee4] w-full h-[76px] flex justify-between items-center px-10 z-[999] ${isScrolled ? 'fixed top-0' : 'relative shadow-lg shadow-black/10'} transition-all duration-300`}>
@@ -138,7 +88,59 @@ export const Navbar = () => {
           <VscThreeBars size={24} className="lg:hidden" onClick={()=>setIsSidebarOpen(true)}/>
         </div>
       </div>
-      {isSidebarOpen && <SideBar/>}
+      {isSidebarOpen && 
+      
+      <div className="fixed top-0 right-0 w-60 bg-[#f0eee4] h-dvh z-[9999] shadow-md">
+        <div className="h-[76px] flex justify-end px-10">
+          <Image
+            src={close}
+            alt="logo"
+            width={30}
+            height={30}
+            onClick={() => setIsSidebarOpen(false)}
+            />
+        </div>
+        <ul className="flex flex-col gap-4 px-4 mt-8">
+            <li>
+              <Link onClick={() => setIsSidebarOpen(false)} href="/" className="font-jakarta font-semibold text-xl hover:text-primary cursor-pointer">
+                Beranda
+              </Link>
+            </li>
+            <li>
+              <Link onClick={() => setIsSidebarOpen(false)} href="/peta-layanan" className="font-jakarta font-semibold text-xl hover:text-primary cursor-pointer">
+                Peta Layanan
+              </Link>
+            </li>
+            <li>
+              <Link onClick={() => setIsSidebarOpen(false)} href="/forum" className="font-jakarta font-semibold text-xl hover:text-primary cursor-pointer">
+                Forum
+              </Link>
+            </li>
+            <li>
+              <Link onClick={() => setIsSidebarOpen(false)} href="/informasi" className="font-jakarta font-semibold text-xl hover:text-primary cursor-pointer">
+                Informasi
+              </Link>
+            </li>
+            <li 
+              className="font-jakarta font-semibold text-xl hover:text-primary cursor-pointer flex items-center gap-2 relative"
+              onClick={handleDampingSetaraClick}
+            >
+              Damping Setara 
+              <FaChevronDown className={`text-gray-400 transition-transform duration-300 ${
+                isModalOpen ? 'rotate-180' : ''
+              }`}/>
+              <DampingSetaraModal 
+                isOpen={isModalOpen}
+                onClose={() => {
+                  setIsSidebarOpen(false)
+                  setIsModalOpen(false)
+                }}
+              />
+            </li>
+          </ul>
+      </div>
+
+      }
     </>
   );
 };

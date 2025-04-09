@@ -79,7 +79,7 @@ export default function Forum(){
       />}
       
     <div className="max-w-[1000px] mx-auto border-[#4F1718] border-x-[1px] overflow-visible">
-      <div className="font-jakarta pt-11 pb-24 bg-[#efeee6] shadow-xl">
+      <div className="font-jakarta pt-2 bg-[#efeee6] shadow-xl">
         <div className="border-b-[1px] border-[#4F1718] w-full relative">
           
             <div className="size-[7px] bg-[#4F1718] absolute -bottom-1 -left-1 rounded-full"></div>
@@ -87,8 +87,8 @@ export default function Forum(){
         
 
             <div className="flex justify-between items-center px-10 py-10">
-                <h1 className="text-6xl font-bold">Forum</h1>
-                <button className="gap-[10px] w-fit inline-flex items-center px-6 py-3 bg-[#4F1718] rounded-3xl">
+                <h1 className="text-4xl font-bold">Forum</h1>
+                <button onClick={()=>showModal(true)}  className="gap-[10px] w-fit inline-flex items-center px-3 md:px-6 py-3 bg-[#4F1718] rounded-3xl">
                     <span className="relative w-6 h-6">
                         <Image 
                             src={plus}
@@ -98,12 +98,12 @@ export default function Forum(){
                             className="object-cover"
                         />
                     </span>
-                    <p onClick={()=>showModal(true)} className="text-white text-xl font-semibold">Buat Postingan Baru</p>
+                    <p className="text-white text-xl font-semibold hidden md:block">Buat Postingan Baru</p>
                 </button>
             </div>
         </div>
 
-        <div>
+        <div className="max-h-[calc(100svh-160px)] overflow-y-scroll">
           {forumPosts && forumPosts.map((post) => (
             <ForumPost
               key={post.id}

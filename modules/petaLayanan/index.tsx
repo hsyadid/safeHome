@@ -57,7 +57,7 @@ export const PetaLayanan = () => {
   return (
     <div className="mx-auto px-4 md:px-16 py-12">
 
-      <div className="mb-8 space-y-1">
+      <div className="mb-8 space-y-1 flex flex-col justify-center ">
         <h1 className="text-5xl font-bold font-jakarta pb-3">Peta Layanan</h1>
         <h2 className="text-sm font-semibold" >Hasil terdekat dengan</h2>
         <div className="flex items-center gap-2 text-gray-600">

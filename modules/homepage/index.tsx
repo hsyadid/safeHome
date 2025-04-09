@@ -133,13 +133,14 @@ export const Homepage = () => {
                                                 alt="gambar_hero"
                                                 width={180}
                                                 height={180}
-                                                className="rounded-[25px]"
+                                                className="rounded-[25px] aspect-square flex-shrink-0 object-contain w-32 md:w-44"
                                             />
                                             <Image
                                                 src={EU_funding_logo}
                                                 alt="gambar_hero"
                                                 width={200}
                                                 height={200}
+                                                className="w-32 object-contain flex-shrink-0 md:w-48"
                                             />
                                         </div>
                                         <p className="font-jakarta font-bold md:text-xl text-[#fcfbfb] text-nowrap">💜 Karena setiap orang berhak merasa aman.</p>
@@ -154,28 +155,28 @@ export const Homepage = () => {
                             <div className="w-full max-w-[800px]">
                                 <Accordion type="single" collapsible className="w-full">
                                     <AccordionItem value="item-1" className="border-y py-3">
-                                        <AccordionTrigger className="text-2xl font-normal">Apa itu Safe Home?</AccordionTrigger>
+                                        <AccordionTrigger className="text-xl md:text-2xl font-normal text-left">Apa itu Safe Home?</AccordionTrigger>
                                         <AccordionContent className="text-lg font-light">
                                             Safe Home adalah platform berbasis web yang menyediakan bantuan bagi penyintas kekerasan berbasis gender (KBG). Di sini, kamu bisa menemukan hotline, layanan psikologis, bantuan hukum, peta layanan terdekat, dan forum dukungan.
                                         </AccordionContent>
                                     </AccordionItem>
                                     
                                     <AccordionItem value="item-2" className="border-y py-3">
-                                        <AccordionTrigger className="text-2xl font-normal">Apakah layanan di Safe Home gratis?</AccordionTrigger>
+                                        <AccordionTrigger className="text-xl md:text-2xl font-normal text-left">Apakah layanan di Safe Home gratis?</AccordionTrigger>
                                         <AccordionContent className="text-lg font-light">
                                             Ya! Semua layanan informasi dan forum komunitas di Safe Home bisa diakses secara gratis. Untuk layanan hukum dan psikologis, ada beberapa yang gratis dan ada juga yang berbayar tergantung dari penyedianya.
                                         </AccordionContent>
                                     </AccordionItem>
                                     
                                     <AccordionItem value="item-3" className="border-y py-3">
-                                        <AccordionTrigger className="text-2xl font-normal">Bagaimana cara mendapatkan bantuan psikologis atau hukum?</AccordionTrigger>
+                                        <AccordionTrigger className="text-xl md:text-2xl font-normal text-left">Bagaimana cara mendapatkan bantuan psikologis atau hukum?</AccordionTrigger>
                                         <AccordionContent className="text-lg font-light">
                                             Kamu bisa langsung cek menu Damping Setara, di sana ada daftar psikolog dan layanan hukum yang bisa kamu hubungi.
                                         </AccordionContent>
                                     </AccordionItem>
                                     
                                     <AccordionItem value="item-4" className="border-y py-3">
-                                        <AccordionTrigger className="text-2xl font-normal">Apakah identitas saya aman jika menggunakan Safe Home?</AccordionTrigger>
+                                        <AccordionTrigger className="text-xl md:text-2xl font-normal text-left">Apakah identitas saya aman jika menggunakan Safe Home?</AccordionTrigger>
                                         <AccordionContent className="text-lg font-light">
                                             100% aman! Kami tidak akan membagikan data pribadimu ke siapa pun tanpa izin. Kalau kamu ingin lebih anonim, kamu bisa pakai nama samaran di forum atau saat konsultasi.
                                         </AccordionContent>

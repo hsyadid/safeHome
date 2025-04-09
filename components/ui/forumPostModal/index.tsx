@@ -31,7 +31,7 @@ export default function ForumPostModal({onIncrement, profileUrl}:ForumPostModalP
         /> 
         <Form action="/">
           <div className="flex flex-col gap-6">
-            <div className="flex gap-6 py-6 border-b-[1px] border-b-[#8E8E8E]">
+            <div className="flex gap-6 py-6 border-b-[1px] border-b-[#8E8E8E] px-4 md:px-0">
               <div className="shrink-0 relative overflow-hidden rounded-full h-14 w-14">
                 <Image 
                   src={profileUrl}
@@ -48,8 +48,8 @@ export default function ForumPostModal({onIncrement, profileUrl}:ForumPostModalP
                 className="p-2 text-xl placeholder:text-[#3F3F3F] placeholder:text-xl w-full resize-none h-auto text-[#3F3F3F] outline-none"
               />
             </div>
-            <div className="flex justify-between items-center gap-8">
-              <div className="flex gap-6">
+            <div className="flex justify-between items-center gap-2 md:gap-8">
+              <div className="flex gap-1 md:gap-6">
                 <Dropdown/>
                 <Dropdown/>
               </div>

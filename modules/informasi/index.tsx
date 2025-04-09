@@ -87,12 +87,12 @@ export default function() {
       
       <div className="max-w-[1000px] h-full mx-auto border-[#4F1718] border-x-[1px] overflow-visible">
         <div className="font-jakarta h-full pt-11 bg-[#efeee6] shadow-xl relative">
-          <div className="absolute border-b-[1px] border-[#4F1718] w-full z-50 bg-[#efeee6]">
-            <div className="size-[7px] bg-[#4F1718] absolute -bottom-1 -left-1 rounded-full"></div>
-            <div className="size-[7px] bg-[#4F1718] absolute -bottom-1 -right-1 rounded-full"></div>
+          <div className="border-b-[1px] border-[#4F1718] w-full bg-[#efeee6]">
+            <div className="size-[4px] bg-[#4F1718] absolute -bottom-1 -left-1 rounded-full"></div>
+            <div className="size-[4px] bg-[#4F1718] absolute -bottom-1 -right-1 rounded-full"></div>
 
-            <div className="flex justify-between items-center px-10 py-10">
-              <h1 className="text-4xl md:text-6xl font-bold">Informasi</h1>
+            <div className="flex justify-between items-center px-10 py-6">
+              <h1 className="text-4xl md:text-5xl font-bold">Informasi</h1>
               <button 
                 onClick={() => setShowModal(true)}
                 className="gap-[10px] w-fit inline-flex items-center px-3 md:px-6 py-3 bg-[#4F1718] rounded-3xl"
@@ -110,8 +110,8 @@ export default function() {
               </button>
             </div>
           </div>
-          <div className="pt-36 h-full">
-            <div className="px-2 md:px-12 flex flex-col gap-6 pt-6 h-full overflow-y-scroll pb-8">
+          <div className="h-full">
+            <div className="max-h-[calc(100svh-160px)] px-2 md:px-12 flex flex-col gap-6 pt-6 h-full overflow-y-scroll pb-6">
               {articles.map((article, i) => 
                 <ArtikelCard
                   key={i}
