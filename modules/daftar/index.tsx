@@ -29,7 +29,8 @@ export default function Daftar() {
         { 
           userId: data.userId, 
           username: data.username,
-          email: data.email 
+          email: data.email,
+          role: data.role || "user" 
         }, 
         data.accessToken
       );
