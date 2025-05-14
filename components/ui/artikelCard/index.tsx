@@ -7,7 +7,7 @@ interface ArtikelCardProps {
   link: string;
 }
 
-export function ArtikelCard({ imgPath, title, isVideo, link }: ArtikelCardProps) {
+export function ArtikelCard({ imgPath, title, isVideo }: ArtikelCardProps) {
   return (
     <div className="flex rounded-[2rem] border-[1px] border-[#8E8E8E] overflow-hidden">
       <div className="rounded-l-[calc(2rem-1px)] relative w-[10rem] md:w-[25rem] aspect-[4/3] overflow-hidden">
