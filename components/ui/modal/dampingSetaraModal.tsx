@@ -13,17 +13,20 @@ export const DampingSetaraModal = ({ isOpen, onClose }: DampingSetaraModalProps)
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.scrollBehavior = 'smooth';
     } else {
       document.body.style.overflow = '';
+      document.documentElement.style.scrollBehavior = '';
     }
 
     return () => {
       document.body.style.overflow = '';
+      document.documentElement.style.scrollBehavior = '';
     };
   }, [isOpen]);
 
   return (
-      <div className={`absolute top-12 md:top-24 right-1 lg:right-[120px] flex justify-center ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'} `}>
+      <div className={`absolute top-12 md:top-16 -z-10  right-1 lg:right-[120px] flex justify-center ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'} `}>
         <div 
           className={`bg-[#f0eee4] rounded-[20px] p-6 w-[250px] space-y-4 shadow-lg 
             transform transition-all duration-300 origin-top

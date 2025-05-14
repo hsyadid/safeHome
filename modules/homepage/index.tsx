@@ -4,7 +4,7 @@ import {TestimonialCard} from "@/../components/ui/testimonialCard"
 import {NewsCard} from "@/../components/ui/newsCard"
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import example from "@/../public/gambar_contoh.jpg"
+import example from "@/../public/bantu.jpg"
 import hand2hand from "@/../public/hand2hand.png"
 import logo from "@/../public/logo anara.png"
 import EU_funding_logo from "@/../public/EU_funding_logo.png"
@@ -118,11 +118,11 @@ export const Homepage = () => {
 
                         <div className=" w-full px-4 md:px-16 py-16 flex-col flex gap-8 justify-center items-center relative overflow-hidden">
 
-                            <div className="relative z-10 py-8 bg-gradient-to-r from-[#4f1818] to-[#263452] overflow-hidden rounded-[24px] flex justify-center items-center">
+                            <div className="relative z-10 py-8 bg-gradient-to-r lg:h-[500px] from-[#4f1818] to-[#263452] overflow-hidden rounded-[24px] flex justify-center items-center">
                                 <div className="flex flex-col justify-around lg:flex-row w-full gap-8 px-4">
-                                    <div className="text-left lg:w-[55%] font-jakarta px-10 space-y-4">
-                                        <h2 className="font-bold text-4xl lg:text-5xl text-[#fcfbfb]">Tentang Anara Indonesia</h2>
-                                        <p className="text-lg lg:text-2xl font-thin text-[#fcfbfb]">
+                                    <div className=" lg:w-[55%] font-jakarta px-10 space-y-10 text-center lg:text-left">
+                                        <h2 className="font-bold text-4xl lg:text-[50px] text-[#fcfbfb]">Tentang Anara Indonesia</h2>
+                                        <p className="text-lg lg:text-[26px] font-thin text-[#fcfbfb]">
                                             Safe Home merupakan inisiatif dari <span className="font-bold">Anara Indonesia</span> dengan dukungan program Youth Empowerment Fund yang disponsori oleh European Union. Kami hadir dengan misi memastikan akses perlindungan dan pemulihan yang mudah, aman, dan terpercaya untukmu.
                                         </p>
                                     </div>
@@ -133,13 +133,14 @@ export const Homepage = () => {
                                                 alt="gambar_hero"
                                                 width={180}
                                                 height={180}
-                                                className="rounded-[25px]"
+                                                className="rounded-[25px] aspect-square flex-shrink-0 object-contain w-32 md:w-44"
                                             />
                                             <Image
                                                 src={EU_funding_logo}
                                                 alt="gambar_hero"
                                                 width={200}
                                                 height={200}
+                                                className="w-32 object-contain flex-shrink-0 md:w-48"
                                             />
                                         </div>
                                         <p className="font-jakarta font-bold md:text-xl text-[#fcfbfb] text-nowrap">💜 Karena setiap orang berhak merasa aman.</p>
@@ -154,28 +155,28 @@ export const Homepage = () => {
                             <div className="w-full max-w-[800px]">
                                 <Accordion type="single" collapsible className="w-full">
                                     <AccordionItem value="item-1" className="border-y py-3">
-                                        <AccordionTrigger className="text-2xl font-normal">Apa itu Safe Home?</AccordionTrigger>
+                                        <AccordionTrigger className="text-xl md:text-2xl font-normal text-left">Apa itu Safe Home?</AccordionTrigger>
                                         <AccordionContent className="text-lg font-light">
                                             Safe Home adalah platform berbasis web yang menyediakan bantuan bagi penyintas kekerasan berbasis gender (KBG). Di sini, kamu bisa menemukan hotline, layanan psikologis, bantuan hukum, peta layanan terdekat, dan forum dukungan.
                                         </AccordionContent>
                                     </AccordionItem>
                                     
                                     <AccordionItem value="item-2" className="border-y py-3">
-                                        <AccordionTrigger className="text-2xl font-normal">Apakah layanan di Safe Home gratis?</AccordionTrigger>
+                                        <AccordionTrigger className="text-xl md:text-2xl font-normal text-left">Apakah layanan di Safe Home gratis?</AccordionTrigger>
                                         <AccordionContent className="text-lg font-light">
                                             Ya! Semua layanan informasi dan forum komunitas di Safe Home bisa diakses secara gratis. Untuk layanan hukum dan psikologis, ada beberapa yang gratis dan ada juga yang berbayar tergantung dari penyedianya.
                                         </AccordionContent>
                                     </AccordionItem>
                                     
                                     <AccordionItem value="item-3" className="border-y py-3">
-                                        <AccordionTrigger className="text-2xl font-normal">Bagaimana cara mendapatkan bantuan psikologis atau hukum?</AccordionTrigger>
+                                        <AccordionTrigger className="text-xl md:text-2xl font-normal text-left">Bagaimana cara mendapatkan bantuan psikologis atau hukum?</AccordionTrigger>
                                         <AccordionContent className="text-lg font-light">
                                             Kamu bisa langsung cek menu Damping Setara, di sana ada daftar psikolog dan layanan hukum yang bisa kamu hubungi.
                                         </AccordionContent>
                                     </AccordionItem>
                                     
                                     <AccordionItem value="item-4" className="border-y py-3">
-                                        <AccordionTrigger className="text-2xl font-normal">Apakah identitas saya aman jika menggunakan Safe Home?</AccordionTrigger>
+                                        <AccordionTrigger className="text-xl md:text-2xl font-normal text-left">Apakah identitas saya aman jika menggunakan Safe Home?</AccordionTrigger>
                                         <AccordionContent className="text-lg font-light">
                                             100% aman! Kami tidak akan membagikan data pribadimu ke siapa pun tanpa izin. Kalau kamu ingin lebih anonim, kamu bisa pakai nama samaran di forum atau saat konsultasi.
                                         </AccordionContent>

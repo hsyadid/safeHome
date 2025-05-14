@@ -62,8 +62,8 @@ export function SectionTitleHero({
             <div>
                 <div className="flex justify-center items-center gap-12 h-full">
                     <button className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#d40000] via-[#b10000] to-[#ba8475] rounded-[16px]"></div>
-                        <div className="relative bg-gradient-to-b from-[#b10000] to-[#d40000/80] rounded-[12px] p-[4px] shadow-[0_1px_3px_rgba(0,0,0,0.5)] group-active:shadow-[0_0px_1px_rgba(0,0,0,0.5)] group-active:scale-[0.995]">
+                        <div className="absolute inset-0 bg-gradient-to-b from-[#d40000] via-[#b10000] to-[#800303] rounded-[16px]"></div>
+                        <div className="relative bg-gradient-to-b from-[#b10000] to-[#d40000/80] rounded-[12px] p-[4px] shadow-[0_1px_3px_rgba(236,174,174,0.5)] group-active:shadow-[0_0px_1px_rgba(0,0,0,0.5)] group-active:scale-[0.995]">
                             <div className="bg-gradient-to-b from-[#d40000/60] to-[#b10000/80] rounded-[8px] px-2 py-2">
                                 <div className="flex gap-2 items-center">
                                     <span className="font-semibold text-white">Darurat Hubungi Sekarang!</span>
