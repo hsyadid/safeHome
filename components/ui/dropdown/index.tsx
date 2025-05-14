@@ -21,7 +21,7 @@ export default function Dropdown({ options, isOpenGlobal, setIsOpenGlobal, id, o
   // Pindahkan semua hooks ke bagian atas komponen, sebelum kondisi apapun
   const [selected, setSelected] = useState<DropdownOption | null>(options && options.length > 0 ? options[0] : null);
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {

@@ -34,7 +34,7 @@ export default function ForumPostModal({onIncrement, profileUrl}: ForumPostModal
     };
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     if (!postContent.trim()) {
