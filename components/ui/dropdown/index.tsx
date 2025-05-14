@@ -18,12 +18,8 @@ interface DropdownProps {
 }
 
 export default function Dropdown({ options, isOpenGlobal, setIsOpenGlobal, id, onSelect }: DropdownProps) {
-  // Check if options exist and have at least one item
-  if (!options || !options.length) {
-    return null;
-  }
-
-  const [selected, setSelected] = useState(options[0]);
+  // Pindahkan semua hooks ke bagian atas komponen, sebelum kondisi apapun
+  const [selected, setSelected] = useState<DropdownOption | null>(options && options.length > 0 ? options[0] : null);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -47,6 +43,11 @@ export default function Dropdown({ options, isOpenGlobal, setIsOpenGlobal, id, o
     }
   }, [isOpenGlobal, id, isOpen]);
 
+  // Check if options exist and have at least one item
+  if (!options || !options.length) {
+    return null;
+  }
+
   const handleToggle = () => {
     const newIsOpen = !isOpen;
     setIsOpen(newIsOpen);
@@ -55,7 +56,7 @@ export default function Dropdown({ options, isOpenGlobal, setIsOpenGlobal, id, o
     }
   };
 
-  const handleSelect = (option) => {
+  const handleSelect = (option: DropdownOption) => {
     setSelected(option);
     setIsOpen(false);
     if (onSelect) {
@@ -71,7 +72,7 @@ export default function Dropdown({ options, isOpenGlobal, setIsOpenGlobal, id, o
         onClick={handleToggle}
       >
         <div className="flex items-center gap-2">
-          {selected.icon && (
+          {selected && selected.icon && (
             <Image 
               src={selected.icon} 
               alt={selected.label} 
@@ -79,7 +80,7 @@ export default function Dropdown({ options, isOpenGlobal, setIsOpenGlobal, id, o
               height={20} 
             />
           )}
-          {selected.label}
+          {selected ? selected.label : 'Select'}
         </div>
         <Image 
           src={chevronDown} 

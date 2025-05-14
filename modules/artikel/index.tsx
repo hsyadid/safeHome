@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { contentData } from "../../data/content";
-import Link from "next/link";
 
 type ArticleProps = {
   params: Promise<{

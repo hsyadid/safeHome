@@ -24,8 +24,8 @@ const optionsRole = [
 export default function ForumPostModal({onIncrement, profileUrl}: ForumPostModalProps) {
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
   const [postContent, setPostContent] = useState("");
-  const [selectedVisibility, setSelectedVisibility] = useState(optionsVisibility[0].value);
-  const [selectedRole, setSelectedRole] = useState(optionsRole[0].value);
+  const [, setSelectedVisibility] = useState(optionsVisibility[0].value);
+  const [, setSelectedRole] = useState(optionsRole[0].value);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
