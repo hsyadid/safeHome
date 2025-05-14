@@ -8,6 +8,7 @@ interface ServiceLocationCardProps {
   address: string;
   phone: string;
   email: string;
+  distance?: string;
   className?: string;
 }
 
@@ -17,6 +18,7 @@ export const ServiceLocationCard = ({
   address,
   phone,
   email,
+  distance,
   className
 }: ServiceLocationCardProps) => {
   return (
@@ -51,6 +53,12 @@ export const ServiceLocationCard = ({
             <p>{email}</p>
           </div>
         </div>
+
+        {distance && (
+          <p className="text-sm text-gray-500 mt-2">
+            Jarak: {distance} km
+          </p>
+        )}
 
         <button className="flex items-center gap-1 text-sm text-primary hover:underline">
           Lihat di Google Maps <FaChevronRight className="text-xs" />

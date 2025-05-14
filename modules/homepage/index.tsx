@@ -4,7 +4,7 @@ import {TestimonialCard} from "@/../components/ui/testimonialCard"
 import {NewsCard} from "@/../components/ui/newsCard"
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import example from "@/../public/gambar_contoh.jpg"
+import example from "@/../public/bantu.jpg"
 import hand2hand from "@/../public/hand2hand.png"
 import logo from "@/../public/logo anara.png"
 import EU_funding_logo from "@/../public/EU_funding_logo.png"
@@ -118,11 +118,11 @@ export const Homepage = () => {
 
                         <div className=" w-full px-4 md:px-16 py-16 flex-col flex gap-8 justify-center items-center relative overflow-hidden">
 
-                            <div className="relative z-10 py-8 bg-gradient-to-r from-[#4f1818] to-[#263452] overflow-hidden rounded-[24px] flex justify-center items-center">
+                            <div className="relative z-10 py-8 bg-gradient-to-r lg:h-[500px] from-[#4f1818] to-[#263452] overflow-hidden rounded-[24px] flex justify-center items-center">
                                 <div className="flex flex-col justify-around lg:flex-row w-full gap-8 px-4">
-                                    <div className="text-left lg:w-[55%] font-jakarta px-10 space-y-4">
-                                        <h2 className="font-bold text-4xl lg:text-5xl text-[#fcfbfb]">Tentang Anara Indonesia</h2>
-                                        <p className="text-lg lg:text-2xl font-thin text-[#fcfbfb]">
+                                    <div className=" lg:w-[55%] font-jakarta px-10 space-y-10 text-center lg:text-left">
+                                        <h2 className="font-bold text-4xl lg:text-[50px] text-[#fcfbfb]">Tentang Anara Indonesia</h2>
+                                        <p className="text-lg lg:text-[26px] font-thin text-[#fcfbfb]">
                                             Safe Home merupakan inisiatif dari <span className="font-bold">Anara Indonesia</span> dengan dukungan program Youth Empowerment Fund yang disponsori oleh European Union. Kami hadir dengan misi memastikan akses perlindungan dan pemulihan yang mudah, aman, dan terpercaya untukmu.
                                         </p>
                                     </div>
