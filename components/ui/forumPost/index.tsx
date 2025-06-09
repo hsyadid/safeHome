@@ -2,7 +2,7 @@ import Image from "next/image"
 import chevronDown from "../../../public/chevron-down.svg"
 import userImg from "../../../public/user.png"
 import { useState } from "react";
-import { useAuth } from "@/../lib/auth"
+import { useAuth } from "../../../lib/auth"
 import Avatar from "../avatar"
 
 interface Reply {

@@ -1,13 +1,13 @@
 'use client'
 import Image from "next/image"
-import logo from "@/../public/logo anara.png"
-import userImg from "@/../public/user.png"
+import logo from "../../../public/logo anara.png"
+import userImg from "../../../public/user.png"
 import { FaChevronDown } from "react-icons/fa";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { VscThreeBars } from "react-icons/vsc";
 import close from "../../../public/close.svg"
-import { useAuth } from "@/../lib/auth";
+import { useAuth } from "../../../lib/auth";
 import { useRouter } from 'next/navigation';
 
 export const Navbar = () => {

@@ -3,9 +3,9 @@
 import Image from "next/image";
 import { MdPhone, MdEmail } from "react-icons/md";
 import { FaChevronRight, FaBalanceScale } from "react-icons/fa";
-import { DEFAULT_IMAGES } from "@/../lib/constants";
-import { useAuth } from "@/../lib/auth";
-import AdminActions from "@/../components/ui/adminActions";
+import { DEFAULT_IMAGES } from "../../../lib/constants";
+import { useAuth } from "../../../lib/auth";
+import AdminActions from "../adminActions";
 
 interface LawFirmCardProps {
   id?: number;

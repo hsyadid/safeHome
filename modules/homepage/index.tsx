@@ -1,22 +1,22 @@
 "use client"
-import {SectionTitle, SectionTitleHero} from "@/../components/ui/sectionTitleButton"
-import {TestimonialCard} from "@/../components/ui/testimonialCard"
+import {SectionTitle, SectionTitleHero} from "../../components/ui/sectionTitleButton"
+import {TestimonialCard} from "../../components/ui/testimonialCard"
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
-import example from "@/../public/bantu.jpg"
-import hand2hand from "@/../public/hand2hand.png"
-import logo from "@/../public/logo anara.png"
-import EU_funding_logo from "@/../public/EU_funding_logo.png"
+import example from "../../public/bantu.jpg"
+import hand2hand from "../../public/hand2hand.png"
+import logo from "../../public/logo anara.png"
+import EU_funding_logo from "../../public/EU_funding_logo.png"
 import { useRouter } from 'next/navigation';
 import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
-  } from "@/../components/ui/accordion"
+  } from "../../components/ui/accordion"
   import { FaAngleRight } from "react-icons/fa6";
-import imagePetalayanan from "@/../public/homepage_petalayanan.jpg"
-import imageDampingSetara from "@/../public/homepage_damping.jpg"
+import imagePetalayanan from "../../public/homepage_petalayanan.jpg"
+import imageDampingSetara from "../../public/homepage_damping.jpg"
   
 
 export const Homepage = () => {

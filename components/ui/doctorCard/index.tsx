@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { MdPhone, MdEmail, MdAccessTime } from "react-icons/md";
 import { FaChevronRight, FaUserMd } from "react-icons/fa";
-import { DEFAULT_IMAGES } from "@/../lib/constants";
+import { DEFAULT_IMAGES } from "../../../lib/constants";
 import { useEffect, useState } from "react";
-import { useAuth } from "@/../lib/auth";
-import AdminActions from "@/../components/ui/adminActions";
+import { useAuth } from "../../../lib/auth";
+import AdminActions from "../adminActions";
 
 interface DoctorCardProps {
   id?: number;

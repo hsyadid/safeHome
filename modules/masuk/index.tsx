@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { loginUser, useAuth } from "@/../lib/auth";
+import { loginUser, useAuth } from "../../lib/auth";
 import { toast } from "react-hot-toast";
 
 export default function Masuk() {

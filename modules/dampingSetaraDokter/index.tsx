@@ -1,12 +1,12 @@
 'use client'
-import { DoctorCard } from "@/../components/ui/doctorCard";
+import { DoctorCard } from "../../components/ui/doctorCard";
 import Pagination from "../../components/ui/pagination";
 import { MdPsychology } from "react-icons/md";
 import { useState, useEffect } from "react";
-import { useAuth } from '@/../lib/auth';
-import AdminForm from '@/../components/ui/adminForm';
-import { AdminAddButton } from '@/../components/ui/adminActions';
-import { DEFAULT_IMAGES } from '@/../lib/constants';
+import { useAuth } from '../../lib/auth';
+import AdminForm from '../../components/ui/adminForm';
+import { AdminAddButton } from '../../components/ui/adminActions';
+import { DEFAULT_IMAGES } from '../../lib/constants';
 
 interface Doctor {
   id: number;

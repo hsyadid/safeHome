@@ -4,7 +4,7 @@ import close from "../../../public/close.svg"
 import userImg from "../../../public/user.png"
 import { useEffect, useState } from "react"
 import Dropdown from "../dropdown"
-import { useAuth } from "@/../lib/auth"
+import { useAuth } from "../../../lib/auth"
 
 interface ForumPostModalProps {
   onClose: () => void;

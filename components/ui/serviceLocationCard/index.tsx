@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { MdLocationOn, MdPhone, MdEmail, MdStar } from "react-icons/md";
 import { FaChevronRight } from "react-icons/fa";
-import { useAuth } from "@/../lib/auth";
-import AdminActions from "@/../components/ui/adminActions";
+import { useAuth } from "../../../lib/auth";
+import AdminActions from "../adminActions";
 
 interface ServiceLocationCardProps {
   id?: number;

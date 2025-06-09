@@ -1,4 +1,4 @@
-import { LayananHukum } from "@/../modules/dampingSetaraOrganisasi";
+import { LayananHukum } from "../../../../modules/dampingSetaraOrganisasi";
 
 export default function Page() {
   return <LayananHukum />;

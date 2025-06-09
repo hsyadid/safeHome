@@ -1,12 +1,12 @@
 'use client'
 import { useState, useEffect } from 'react';
-import { useAuth } from '@/../lib/auth';
+import { useAuth } from '../../../lib/auth';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { Navbar } from '@/../components/elements/navbar';
-import { EditProfileModal } from '@/../components/elements/profile/EditProfileModal';
-import userImg from "@/../public/user.png";
-import chevronDown from "@/../public/chevron-down.svg";
+import { Navbar } from '../../../components/elements/navbar';
+import { EditProfileModal } from '../../../components/elements/profile/EditProfileModal';
+import userImg from "../../../public/user.png";
+import chevronDown from "../../../public/chevron-down.svg";
 
 interface ForumPost {
   id: number;

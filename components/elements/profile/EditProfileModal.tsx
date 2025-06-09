@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import Image from 'next/image';
-import { useAuth } from '@/../lib/auth';
+import { useAuth } from '../../../lib/auth';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { toast } from 'sonner';
