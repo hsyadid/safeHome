@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { calculateDistance } from '@/lib/mapUtils';
+import { calculateDistance } from '../../src/lib/mapUtils';
 import { ServiceLocationCard } from "../../components/ui/serviceLocationCard";
 import { MdLocationOn, MdRefresh, MdInfo } from "react-icons/md";
 import { useAuth } from '../../lib/auth';
