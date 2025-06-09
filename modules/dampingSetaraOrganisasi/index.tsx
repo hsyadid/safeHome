@@ -1,5 +1,5 @@
 'use client'
-import { LawFirmCard } from "../../components/ui/lawFirmCard";
+import LawFirmCard from "../../components/ui/lawFirmCard";
 import Pagination from "../../components/ui/pagination";
 import { MdGavel } from "react-icons/md";
 import { useState, useEffect } from "react";
@@ -12,12 +12,22 @@ interface LawFirm {
   id: number;
   name: string;
   phone: string;
-  email?: string;
-  imageUrl?: string;
+  email?: string | null;
+  imageUrl?: string | null;
   gmapsUrl: string;
 }
 
-
+// Convert LawFirm to form data
+const convertToFormData = (lawFirm: LawFirm | null) => {
+  if (!lawFirm) return null;
+  return {
+    name: lawFirm.name,
+    phone: lawFirm.phone,
+    email: lawFirm.email || undefined,
+    imageUrl: lawFirm.imageUrl || undefined,
+    gmapsUrl: lawFirm.gmapsUrl
+  };
+};
 
 export const LayananHukum = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -246,12 +256,7 @@ export const LayananHukum = () => {
                   }}
                 >
                   <LawFirmCard
-                    id={lawFirm.id}
-                    name={lawFirm.name}
-                    phone={lawFirm.phone}
-                    email={lawFirm.email || '-'}
-                    imageUrl={lawFirm.imageUrl || DEFAULT_IMAGES.HUKUM}
-                    gmapsUrl={lawFirm.gmapsUrl}
+                    lawFirm={lawFirm}
                     onEdit={isAdmin ? handleEditLawFirm : undefined}
                     onDelete={isAdmin ? handleDeleteLawFirm : undefined}
                   />
@@ -301,7 +306,7 @@ export const LayananHukum = () => {
           }}
           onSubmit={handleSubmitLawFirm}
           type="lawFirm"
-          initialData={editingLawFirm}
+          initialData={convertToFormData(editingLawFirm)}
           isEdit={!!editingLawFirm}
         />
       )}

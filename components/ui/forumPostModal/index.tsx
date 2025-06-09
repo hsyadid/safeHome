@@ -3,23 +3,11 @@ import Image from "next/image"
 import close from "../../../public/close.svg"
 import userImg from "../../../public/user.png"
 import { useEffect, useState } from "react"
-import Dropdown from "../dropdown"
-import { useAuth } from "../../../lib/auth"
+import { useAuth } from "@/../lib/auth"
 
 interface ForumPostModalProps {
-  profileUrl: string;
   onClose: () => void;
-  onPostSubmit?: (data: PostData) => void;
-}
-
-interface PostData {
-  text: string;
-  visibility: string;
-  isAnonymous: boolean;
-  role: string;
-  userId?: number;
-  profileUrl: string;
-  name?: string;
+  onSubmit: (postData: any) => void;
 }
 
 const optionsVisibility = [
@@ -59,8 +47,9 @@ const optionsRole = [
 ];
 
 
-export default function ForumPostModal({onClose, onPostSubmit}: ForumPostModalProps) {
+export default function ForumPostModal({onClose, onSubmit}: ForumPostModalProps) {
   const { user, isAdmin } = useAuth();
+  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
   const [postContent, setPostContent] = useState("");
   const [selectedVisibility, setSelectedVisibility] = useState(optionsVisibility[0].value);
   const [selectedRole, setSelectedRole] = useState(optionsRole[0].value);
@@ -99,7 +88,7 @@ export default function ForumPostModal({onClose, onPostSubmit}: ForumPostModalPr
     };
     
     // Submit the post data
-    onPostSubmit?.(postData);
+    onSubmit(postData);
   };
 
   return(

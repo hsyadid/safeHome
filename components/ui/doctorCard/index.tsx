@@ -9,23 +9,42 @@ import { useAuth } from "../../../lib/auth";
 import AdminActions from "../adminActions";
 
 interface DoctorCardProps {
-  doctor: {
-    id: number;
-    name: string;
-    phone: string;
-    email?: string | null;
-    imageUrl?: string | null;
-    gmapsUrl: string;
-  };
+  id?: number;
+  name: string;
+  specialty?: string;
+  phone?: string;
+  email?: string;
+  imageUrl: string;
+  startTime?: Date;
+  endTime?: Date;
+  gmapsUrl?: string;
+  isAvailable?: boolean;
+  className?: string;
+  onEdit?: (doctor: any) => void;
+  onDelete?: (id: number) => void;
 }
 
-export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
+export const DoctorCard = ({
+  id,
+  name,
+  specialty,
+  phone,
+  email,
+  imageUrl,
+  startTime,
+  endTime,
+  gmapsUrl,
+  isAvailable = true,
+  className,
+  onEdit,
+  onDelete
+}: DoctorCardProps) => {
   const [isWithinHours, setIsWithinHours] = useState(false);
   const { isAdmin } = useAuth();
 
   useEffect(() => {
     const checkOperatingHours = () => {
-      if (!doctor.startTime || !doctor.endTime) {
+      if (!startTime || !endTime) {
         setIsWithinHours(true); // Default to available if no time specified
         return;
       }
@@ -34,8 +53,8 @@ export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
       const currentHour = now.getHours();
       const currentMinute = now.getMinutes();
       
-      const start = new Date(doctor.startTime);
-      const end = new Date(doctor.endTime);
+      const start = new Date(startTime);
+      const end = new Date(endTime);
       
       const startHour = start.getHours();
       const startMinute = start.getMinutes();
@@ -54,7 +73,7 @@ export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
     const interval = setInterval(checkOperatingHours, 60000);
     
     return () => clearInterval(interval);
-  }, [doctor.startTime, doctor.endTime]);
+  }, [startTime, endTime]);
 
   const formatTime = (date: Date) => {
     const d = new Date(date);
@@ -71,12 +90,12 @@ export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
   };
 
   return (
-    <div className={`group bg-[#f0eee4] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-[#4F1718]/20 transform hover:-translate-y-1 h-[480px] flex flex-col`}>
+    <div className={`group bg-[#f0eee4] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-[#4F1718]/20 transform hover:-translate-y-1 h-[480px] flex flex-col ${className}`}>
       {/* Image Container with Overlay */}
       <div className="aspect-[4/3] relative overflow-hidden flex-shrink-0">
         <Image 
-          src={doctor.imageUrl || DEFAULT_IMAGES.PSIKOLOG}
-          alt={doctor.name}
+          src={imageUrl || DEFAULT_IMAGES.PSIKOLOG}
+          alt={name}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
@@ -87,8 +106,8 @@ export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
         {isAdmin && (
           <div className="absolute top-3 left-3">
             <AdminActions
-              onEdit={() => onEdit?.({ id: doctor.id, name: doctor.name, specialty: doctor.specialty, phone: doctor.phone, email: doctor.email, imageUrl: doctor.imageUrl, startTime: doctor.startTime, endTime: doctor.endTime, gmapsUrl: doctor.gmapsUrl, isAvailable: doctor.isAvailable })}
-              onDelete={() => onDelete?.(doctor.id)}
+              onEdit={() => onEdit?.({ id, name, specialty, phone, email, imageUrl, startTime, endTime, gmapsUrl, isAvailable })}
+              onDelete={() => onDelete?.(id!)}
               itemType="dokter"
               className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             />
@@ -104,7 +123,7 @@ export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
         <div className="h-12"> {/* Fixed height to accommodate 2 lines */}
           <h3 
             className="font-jakarta font-bold text-lg text-gray-900 leading-tight group-hover:text-[#4F1718] transition-colors duration-200 line-clamp-2 text-left" 
-            title={doctor.name}
+            title={name}
             style={{
               display: '-webkit-box',
               WebkitLineClamp: 2,
@@ -112,13 +131,13 @@ export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
               overflow: 'hidden'
             }}
           >
-            {doctor.name}
+            {name}
           </h3>
         </div>
         
         {/* Contact Information */}
         <div className="space-y-3 flex-1">
-          {doctor.specialty && (
+          {specialty && (
             <div className="flex gap-3 items-start">
               <div className="bg-blue-50 rounded-lg p-2 flex-shrink-0">
                 <FaUserMd className="text-blue-500 text-sm" />
@@ -126,7 +145,7 @@ export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
               <div className="flex-1 h-10"> {/* Fixed height for 2 lines */}
                 <p 
                   className="text-sm text-gray-600 leading-relaxed line-clamp-2" 
-                  title={doctor.specialty}
+                  title={specialty}
                   style={{
                     display: '-webkit-box',
                     WebkitLineClamp: 2,
@@ -134,18 +153,18 @@ export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
                     overflow: 'hidden'
                   }}
                 >
-                  {doctor.specialty}
+                  {specialty}
                 </p>
               </div>
             </div>
           )}
           
-          {doctor.phone && (
+          {phone && (
             <div className="flex gap-3 items-center">
               <div className="bg-green-50 rounded-lg p-2 flex-shrink-0">
                 <MdPhone className="text-green-500 text-sm" />
               </div>
-              <p className="text-sm text-gray-600 font-medium">{doctor.phone}</p>
+              <p className="text-sm text-gray-600 font-medium">{phone}</p>
             </div>
           )}
           
@@ -153,18 +172,18 @@ export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
             <div className="bg-red-50 rounded-lg p-2 flex-shrink-0">
               <MdEmail className="text-red-500 text-sm" />
             </div>
-            <p className="text-sm text-gray-600 flex-1" title={doctor.email || '-'}>
-              {doctor.email && doctor.email !== '-' ? truncateText(doctor.email, 25) : '-'}
+            <p className="text-sm text-gray-600 flex-1" title={email || '-'}>
+              {email && email !== '-' ? truncateText(email, 25) : '-'}
             </p>
           </div>
 
-          {doctor.startTime && doctor.endTime && (
+          {startTime && endTime && (
             <div className="flex gap-3 items-center">
               <div className="bg-purple-50 rounded-lg p-2 flex-shrink-0">
                 <MdAccessTime className="text-purple-500 text-sm" />
               </div>
               <p className="text-sm text-gray-600">
-                {formatTime(doctor.startTime)} - {formatTime(doctor.endTime)}
+                {formatTime(startTime)} - {formatTime(endTime)}
               </p>
             </div>
           )}
@@ -173,29 +192,29 @@ export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
         {/* Action Button */}
         <div className="pt-2 mt-auto">
           <a 
-            href={doctor.gmapsUrl || '#'}
-            target={doctor.gmapsUrl ? "_blank" : "_self"}
-            rel={doctor.gmapsUrl ? "noopener noreferrer" : ""}
+            href={gmapsUrl || '#'}
+            target={gmapsUrl ? "_blank" : "_self"}
+            rel={gmapsUrl ? "noopener noreferrer" : ""}
             className={`w-full py-3 px-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 group/btn ${
-              doctor.gmapsUrl 
+              gmapsUrl 
                 ? 'bg-gradient-to-r from-[#4F1718] to-[#6B2425] hover:from-[#3a1112] hover:to-[#4a1718] text-white'
-                : doctor.isAvailable && isWithinHours
+                : isAvailable && isWithinHours
                   ? 'bg-gradient-to-r from-[#4F1718] to-[#6B2425] hover:from-[#3a1112] hover:to-[#4a1718] text-white'
                   : 'bg-gray-200 text-gray-500 cursor-not-allowed'
             }`}
-            onClick={!doctor.gmapsUrl && (!doctor.isAvailable || !isWithinHours) ? (e) => e.preventDefault() : undefined}
+            onClick={!gmapsUrl && (!isAvailable || !isWithinHours) ? (e) => e.preventDefault() : undefined}
           >
             <span>
-              {doctor.gmapsUrl 
+              {gmapsUrl 
                 ? 'Lihat di Google Maps'
-                : !doctor.isAvailable 
+                : !isAvailable 
                   ? 'Belum Tersedia' 
                   : !isWithinHours 
                     ? 'Di Luar Jam Operasi' 
                     : 'Kontak Dokter'
               }
             </span>
-            {(doctor.gmapsUrl || (doctor.isAvailable && isWithinHours)) && (
+            {(gmapsUrl || (isAvailable && isWithinHours)) && (
               <FaChevronRight className="text-sm transition-transform duration-200 group-hover/btn:translate-x-1" />
             )}
           </a>

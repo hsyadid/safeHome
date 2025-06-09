@@ -18,9 +18,11 @@ interface LawFirm {
 
 interface LawFirmCardProps {
   lawFirm: LawFirm;
+  onEdit?: (lawFirm: LawFirm) => void;
+  onDelete?: (id: number) => Promise<void>;
 }
 
-const LawFirmCard: React.FC<LawFirmCardProps> = ({ lawFirm }) => {
+const LawFirmCard: React.FC<LawFirmCardProps> = ({ lawFirm, onEdit, onDelete }) => {
   const { isAdmin } = useAuth();
   
   const truncateText = (text: string, maxLength: number) => {
@@ -45,8 +47,8 @@ const LawFirmCard: React.FC<LawFirmCardProps> = ({ lawFirm }) => {
         {isAdmin && (
           <div className="absolute top-3 left-3">
             <AdminActions
-              onEdit={() => {}}
-              onDelete={() => {}}
+              onEdit={() => onEdit?.(lawFirm)}
+              onDelete={() => onDelete?.(lawFirm.id)}
               itemType="lembaga hukum"
               className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             />
