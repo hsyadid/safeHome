@@ -155,7 +155,7 @@ export const PetaLayanan = () => {
   // Fetch data from backend
   const fetchBackendData = async (): Promise<Location[]> => {
     try {
-      const response = await fetch('http://localhost:3001/organisasi-layanan');
+      const response = await fetch('https://safehomeanara.id/organisasi-layanan');
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
@@ -212,7 +212,7 @@ export const PetaLayanan = () => {
   const handleDeleteLocation = async (id: number) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus lokasi layanan ini?')) {
       try {
-        const response = await fetch(`http://localhost:3001/organisasi-layanan/${id}`, {
+        const response = await fetch(`https://safehomeanara.id/organisasi-layanan/${id}`, {
           method: 'DELETE',
         });
         
@@ -246,7 +246,7 @@ export const PetaLayanan = () => {
       let response;
       if (editingLocation) {
         // Update location
-        response = await fetch(`http://localhost:3001/organisasi-layanan/${editingLocation.id}`, {
+        response = await fetch(`https://safehomeanara.id/organisasi-layanan/${editingLocation.id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -255,7 +255,7 @@ export const PetaLayanan = () => {
         });
       } else {
         // Add new location  
-        response = await fetch('http://localhost:3001/organisasi-layanan', {
+        response = await fetch('https://safehomeanara.id/organisasi-layanan', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

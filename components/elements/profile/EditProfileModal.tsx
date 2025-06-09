@@ -92,7 +92,7 @@ export function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
         formData.append('removePhoto', 'true');
       }
 
-      const response = await fetch('/api/user/profile', {
+      const response = await fetch('https://safehomeanara.id/api/user/profile', {
         method: 'PUT',
         body: formData,
       });

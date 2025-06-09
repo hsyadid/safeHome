@@ -1,4 +1,4 @@
-export const API_URL = "http://localhost:3001";
+export const API_URL = "https://safehomeanara.id";
 
 export const ENDPOINTS = {
   AUTH: {
@@ -16,6 +16,6 @@ export const ENDPOINTS = {
     CREATE: `${API_URL}/replies`,
   },
   USER: {
-    UPDATE_PROFILE: `${API_URL}/user/profile`,
+    UPDATE_PROFILE: `${API_URL}/api/user/profile`,
   },
 };

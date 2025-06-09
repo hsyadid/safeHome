@@ -93,7 +93,7 @@ export default function ProfilePage() {
     setIsLoading(true);
     try {
       // Fetch user's posts
-      const postsResponse = await fetch(`http://localhost:3001/posts/user/${user.userId}`);
+      const postsResponse = await fetch(`https://safehomeanara.id/posts/user/${user.userId}`);
       if (postsResponse.ok) {
         const userPosts = await postsResponse.json();
         // Transform backend data to frontend format
@@ -125,7 +125,7 @@ export default function ProfilePage() {
       }
 
       // Fetch user's replies
-      const repliesResponse = await fetch(`http://localhost:3001/replies/user/${user.userId}`);
+      const repliesResponse = await fetch(`https://safehomeanara.id/replies/user/${user.userId}`);
       if (repliesResponse.ok) {
         const userReplies = await repliesResponse.json();
         // Transform backend data to frontend format
