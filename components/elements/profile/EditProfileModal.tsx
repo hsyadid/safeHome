@@ -106,7 +106,8 @@ export function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
       toast.success('Profil berhasil diupdate!');
       onClose();
     } catch (error) {
-      toast.error('Gagal update profil. Silakan coba lagi.');
+      console.error('Error updating profile:', error);
+      toast.error('Terjadi kesalahan saat memperbarui profil');
     } finally {
       setIsLoading(false);
     }

@@ -1,6 +1,3 @@
-import Image from "next/image"
-import chevronDown from "../../../public/chevron-down.svg"
-import userImg from "../../../public/user.png"
 import { useState } from "react";
 import { useAuth } from "../../../lib/auth"
 import Avatar from "../avatar"
@@ -98,22 +95,22 @@ const ForumPost = ({
         private: 'bg-[#ad8861] text-white'
     };
 
-    const displayProfileUrl = isAnonymous ? userImg : profileUrl;
+    // const displayProfileUrl = isAnonymous ? userImg : profileUrl;
     const displayName = isAnonymous ? "Anonymous" : name;
 
-    const handleReplySubmit = (parentId: number) => {
-        if (!replyText.trim()) return;
-        
-        // Admin reply selalu public, non-admin mengikuti parent post
-        const replyVisibility = isAdmin ? "public" : currentVisibility;
-        const replyIsAnonymous = isAdmin ? false : replyAnonymous;
-        
-        onReply?.(parentId, replyText, replyIsAnonymous, replyVisibility);
-        setReplyText("");
-        setReplyAnonymous(false);
-        setShowReplyForm(false);
-        setReplyingTo(null);
-    };
+    // const handleReplySubmit = (parentId: number) => {
+    //     if (!replyText.trim()) return;
+    //     
+    //     // Admin reply selalu public, non-admin mengikuti parent post
+    //     const replyVisibility = isAdmin ? "public" : currentVisibility;
+    //     const replyIsAnonymous = isAdmin ? false : replyAnonymous;
+    //     
+    //     onReply?.(parentId, replyText, replyIsAnonymous, replyVisibility);
+    //     setReplyText("");
+    //     setReplyAnonymous(false);
+    //     setShowReplyForm(false);
+    //     setReplyingTo(null);
+    // };
 
     const ReplyForm = ({ parentId }: { parentId: number }) => {
         const [localReplyText, setLocalReplyText] = useState("");

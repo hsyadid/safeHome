@@ -1,36 +1,40 @@
 import Image from "next/image";
-import { MdLocationOn, MdPhone, MdEmail, MdStar } from "react-icons/md";
+import { MdLocationOn, MdPhone, MdEmail } from "react-icons/md";
 import { FaChevronRight } from "react-icons/fa";
 import { useAuth } from "../../../lib/auth";
 import AdminActions from "../adminActions";
 
-interface ServiceLocationCardProps {
-  id?: number;
+interface ServiceLocation {
+  id: number;
   name: string;
-  imageUrl: string;
   address: string;
   phone: string;
-  email: string;
+  email?: string | null;
+  imageUrl?: string | null;
   gmapsUrl: string;
-  distance?: string;
-  className?: string;
-  onEdit?: (location: any) => void;
-  onDelete?: (id: number) => void;
+  latitude: number;
+  longitude: number;
+}
+
+interface ServiceLocationCardProps {
+  serviceLocation: ServiceLocation;
 }
 
 export const ServiceLocationCard = ({
-  id,
-  name,
-  imageUrl,
-  address,
-  phone,
-  email,
-  gmapsUrl,
-  distance,
+  serviceLocation: {
+    id,
+    name,
+    imageUrl,
+    address,
+    phone,
+    email,
+    gmapsUrl,
+    distance
+  },
   className,
   onEdit,
   onDelete
-}: ServiceLocationCardProps) => {
+}: ServiceLocationCardProps & { className?: string; onEdit?: (location: any) => void; onDelete?: (id: number) => void }) => {
   const { isAdmin } = useAuth();
 
   const truncateText = (text: string, maxLength: number) => {
@@ -43,7 +47,7 @@ export const ServiceLocationCard = ({
       {/* Image Container with Overlay */}
       <div className="aspect-[4/3] relative overflow-hidden flex-shrink-0">
         <Image 
-          src={imageUrl}
+          src={imageUrl || ""}
           alt={name}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -130,7 +134,7 @@ export const ServiceLocationCard = ({
               <MdEmail className="text-green-500 text-sm" />
             </div>
             <p className="text-sm text-gray-600 flex-1" title={email}>
-              {truncateText(email, 25)}
+              {truncateText(email || "", 25)}
             </p>
           </div>
         </div>

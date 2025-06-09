@@ -7,52 +7,34 @@ import { DEFAULT_IMAGES } from "../../../lib/constants";
 import { useAuth } from "../../../lib/auth";
 import AdminActions from "../adminActions";
 
-interface LawFirmCardProps {
-  id?: number;
+interface LawFirm {
+  id: number;
   name: string;
-  phone?: string;
-  email?: string;
-  imageUrl: string;
-  redirectUrl?: string;
-  gmapsUrl?: string;
-  className?: string;
-  onEdit?: (lawFirm: any) => void;
-  onDelete?: (id: number) => void;
+  phone: string;
+  email?: string | null;
+  imageUrl?: string | null;
+  gmapsUrl: string;
 }
 
-export const LawFirmCard = ({
-  id,
-  name,
-  phone,
-  email,
-  imageUrl,
-  redirectUrl,
-  gmapsUrl,
-  className,
-  onEdit,
-  onDelete
-}: LawFirmCardProps) => {
+interface LawFirmCardProps {
+  lawFirm: LawFirm;
+}
+
+const LawFirmCard: React.FC<LawFirmCardProps> = ({ lawFirm }) => {
   const { isAdmin } = useAuth();
   
-  const handleClick = () => {
-    const url = gmapsUrl || redirectUrl;
-    if (url) {
-      window.open(url, '_blank', 'noopener,noreferrer');
-    }
-  };
-
   const truncateText = (text: string, maxLength: number) => {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + '...';
   };
 
   return (
-    <div className={`group bg-[#f0eee4] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-[#4F1718]/20 transform hover:-translate-y-1 h-[480px] flex flex-col ${className}`}>
+    <div className={`group bg-[#f0eee4] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-[#4F1718]/20 transform hover:-translate-y-1 h-[480px] flex flex-col`}>
       {/* Image Container with Overlay */}
       <div className="aspect-[4/3] relative overflow-hidden flex-shrink-0">
         <Image 
-          src={imageUrl || DEFAULT_IMAGES.HUKUM}
-          alt={name}
+          src={lawFirm.imageUrl || DEFAULT_IMAGES.HUKUM}
+          alt={lawFirm.name}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
@@ -63,8 +45,8 @@ export const LawFirmCard = ({
         {isAdmin && (
           <div className="absolute top-3 left-3">
             <AdminActions
-              onEdit={() => onEdit?.({ id, name, phone, email, imageUrl, redirectUrl, gmapsUrl })}
-              onDelete={() => onDelete?.(id!)}
+              onEdit={() => {}}
+              onDelete={() => {}}
               itemType="lembaga hukum"
               className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             />
@@ -90,7 +72,7 @@ export const LawFirmCard = ({
         <div className="h-12"> {/* Fixed height to accommodate 2 lines */}
           <h3 
             className="font-jakarta font-bold text-lg text-gray-900 leading-tight group-hover:text-[#4F1718] transition-colors duration-200 line-clamp-2 text-left" 
-            title={name}
+            title={lawFirm.name}
             style={{
               display: '-webkit-box',
               WebkitLineClamp: 2,
@@ -98,18 +80,18 @@ export const LawFirmCard = ({
               overflow: 'hidden'
             }}
           >
-            {name}
+            {lawFirm.name}
           </h3>
         </div>
         
         {/* Contact Information */}
         <div className="space-y-3 flex-1">
-          {phone && (
+          {lawFirm.phone && (
             <div className="flex gap-3 items-center">
               <div className="bg-green-50 rounded-lg p-2 flex-shrink-0">
                 <MdPhone className="text-green-500 text-sm" />
               </div>
-              <p className="text-sm text-gray-600 font-medium">{phone}</p>
+              <p className="text-sm text-gray-600 font-medium">{lawFirm.phone}</p>
             </div>
           )}
           
@@ -117,8 +99,8 @@ export const LawFirmCard = ({
             <div className="bg-red-50 rounded-lg p-2 flex-shrink-0">
               <MdEmail className="text-red-500 text-sm" />
             </div>
-            <p className="text-sm text-gray-600 flex-1" title={email || '-'}>
-              {email && email !== '-' ? truncateText(email, 25) : '-'}
+            <p className="text-sm text-gray-600 flex-1" title={lawFirm.email || '-'}>
+              {lawFirm.email && lawFirm.email !== '-' ? truncateText(lawFirm.email, 25) : '-'}
             </p>
           </div>
         </div>
@@ -126,13 +108,13 @@ export const LawFirmCard = ({
         {/* Action Button */}
         <div className="pt-2 mt-auto">
           <a 
-            href={gmapsUrl || redirectUrl || '#'}
-            target={gmapsUrl || redirectUrl ? "_blank" : "_self"}
-            rel={gmapsUrl || redirectUrl ? "noopener noreferrer" : ""}
+            href={lawFirm.gmapsUrl || '#'}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full bg-gradient-to-r from-[#4F1718] to-[#6B2425] hover:from-[#3a1112] hover:to-[#4a1718] text-white py-3 px-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 group/btn"
           >
             <span>
-              {gmapsUrl ? 'Lihat di Google Maps' : 'Kunjungi Website'}
+              Lihat di Google Maps
             </span>
             <FaChevronRight className="text-sm transition-transform duration-200 group-hover/btn:translate-x-1" />
           </a>
@@ -140,4 +122,6 @@ export const LawFirmCard = ({
       </div>
     </div>
   );
-}; 
+};
+
+export default LawFirmCard; 

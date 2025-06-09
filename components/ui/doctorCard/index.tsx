@@ -9,42 +9,23 @@ import { useAuth } from "../../../lib/auth";
 import AdminActions from "../adminActions";
 
 interface DoctorCardProps {
-  id?: number;
-  name: string;
-  specialty?: string;
-  phone?: string;
-  email?: string;
-  imageUrl: string;
-  startTime?: Date;
-  endTime?: Date;
-  gmapsUrl?: string;
-  isAvailable?: boolean;
-  className?: string;
-  onEdit?: (doctor: any) => void;
-  onDelete?: (id: number) => void;
+  doctor: {
+    id: number;
+    name: string;
+    phone: string;
+    email?: string | null;
+    imageUrl?: string | null;
+    gmapsUrl: string;
+  };
 }
 
-export const DoctorCard = ({
-  id,
-  name,
-  specialty,
-  phone,
-  email,
-  imageUrl,
-  startTime,
-  endTime,
-  gmapsUrl,
-  isAvailable = true,
-  className,
-  onEdit,
-  onDelete
-}: DoctorCardProps) => {
+export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
   const [isWithinHours, setIsWithinHours] = useState(false);
   const { isAdmin } = useAuth();
 
   useEffect(() => {
     const checkOperatingHours = () => {
-      if (!startTime || !endTime) {
+      if (!doctor.startTime || !doctor.endTime) {
         setIsWithinHours(true); // Default to available if no time specified
         return;
       }
@@ -53,8 +34,8 @@ export const DoctorCard = ({
       const currentHour = now.getHours();
       const currentMinute = now.getMinutes();
       
-      const start = new Date(startTime);
-      const end = new Date(endTime);
+      const start = new Date(doctor.startTime);
+      const end = new Date(doctor.endTime);
       
       const startHour = start.getHours();
       const startMinute = start.getMinutes();
@@ -73,7 +54,7 @@ export const DoctorCard = ({
     const interval = setInterval(checkOperatingHours, 60000);
     
     return () => clearInterval(interval);
-  }, [startTime, endTime]);
+  }, [doctor.startTime, doctor.endTime]);
 
   const formatTime = (date: Date) => {
     const d = new Date(date);
@@ -90,12 +71,12 @@ export const DoctorCard = ({
   };
 
   return (
-    <div className={`group bg-[#f0eee4] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-[#4F1718]/20 transform hover:-translate-y-1 h-[480px] flex flex-col ${className}`}>
+    <div className={`group bg-[#f0eee4] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-[#4F1718]/20 transform hover:-translate-y-1 h-[480px] flex flex-col`}>
       {/* Image Container with Overlay */}
       <div className="aspect-[4/3] relative overflow-hidden flex-shrink-0">
         <Image 
-          src={imageUrl || DEFAULT_IMAGES.PSIKOLOG}
-          alt={name}
+          src={doctor.imageUrl || DEFAULT_IMAGES.PSIKOLOG}
+          alt={doctor.name}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
@@ -106,8 +87,8 @@ export const DoctorCard = ({
         {isAdmin && (
           <div className="absolute top-3 left-3">
             <AdminActions
-              onEdit={() => onEdit?.({ id, name, specialty, phone, email, imageUrl, startTime, endTime, gmapsUrl, isAvailable })}
-              onDelete={() => onDelete?.(id!)}
+              onEdit={() => onEdit?.({ id: doctor.id, name: doctor.name, specialty: doctor.specialty, phone: doctor.phone, email: doctor.email, imageUrl: doctor.imageUrl, startTime: doctor.startTime, endTime: doctor.endTime, gmapsUrl: doctor.gmapsUrl, isAvailable: doctor.isAvailable })}
+              onDelete={() => onDelete?.(doctor.id)}
               itemType="dokter"
               className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             />
@@ -123,7 +104,7 @@ export const DoctorCard = ({
         <div className="h-12"> {/* Fixed height to accommodate 2 lines */}
           <h3 
             className="font-jakarta font-bold text-lg text-gray-900 leading-tight group-hover:text-[#4F1718] transition-colors duration-200 line-clamp-2 text-left" 
-            title={name}
+            title={doctor.name}
             style={{
               display: '-webkit-box',
               WebkitLineClamp: 2,
@@ -131,13 +112,13 @@ export const DoctorCard = ({
               overflow: 'hidden'
             }}
           >
-            {name}
+            {doctor.name}
           </h3>
         </div>
         
         {/* Contact Information */}
         <div className="space-y-3 flex-1">
-          {specialty && (
+          {doctor.specialty && (
             <div className="flex gap-3 items-start">
               <div className="bg-blue-50 rounded-lg p-2 flex-shrink-0">
                 <FaUserMd className="text-blue-500 text-sm" />
@@ -145,7 +126,7 @@ export const DoctorCard = ({
               <div className="flex-1 h-10"> {/* Fixed height for 2 lines */}
                 <p 
                   className="text-sm text-gray-600 leading-relaxed line-clamp-2" 
-                  title={specialty}
+                  title={doctor.specialty}
                   style={{
                     display: '-webkit-box',
                     WebkitLineClamp: 2,
@@ -153,18 +134,18 @@ export const DoctorCard = ({
                     overflow: 'hidden'
                   }}
                 >
-                  {specialty}
+                  {doctor.specialty}
                 </p>
               </div>
             </div>
           )}
           
-          {phone && (
+          {doctor.phone && (
             <div className="flex gap-3 items-center">
               <div className="bg-green-50 rounded-lg p-2 flex-shrink-0">
                 <MdPhone className="text-green-500 text-sm" />
               </div>
-              <p className="text-sm text-gray-600 font-medium">{phone}</p>
+              <p className="text-sm text-gray-600 font-medium">{doctor.phone}</p>
             </div>
           )}
           
@@ -172,18 +153,18 @@ export const DoctorCard = ({
             <div className="bg-red-50 rounded-lg p-2 flex-shrink-0">
               <MdEmail className="text-red-500 text-sm" />
             </div>
-            <p className="text-sm text-gray-600 flex-1" title={email || '-'}>
-              {email && email !== '-' ? truncateText(email, 25) : '-'}
+            <p className="text-sm text-gray-600 flex-1" title={doctor.email || '-'}>
+              {doctor.email && doctor.email !== '-' ? truncateText(doctor.email, 25) : '-'}
             </p>
           </div>
 
-          {startTime && endTime && (
+          {doctor.startTime && doctor.endTime && (
             <div className="flex gap-3 items-center">
               <div className="bg-purple-50 rounded-lg p-2 flex-shrink-0">
                 <MdAccessTime className="text-purple-500 text-sm" />
               </div>
               <p className="text-sm text-gray-600">
-                {formatTime(startTime)} - {formatTime(endTime)}
+                {formatTime(doctor.startTime)} - {formatTime(doctor.endTime)}
               </p>
             </div>
           )}
@@ -192,29 +173,29 @@ export const DoctorCard = ({
         {/* Action Button */}
         <div className="pt-2 mt-auto">
           <a 
-            href={gmapsUrl || '#'}
-            target={gmapsUrl ? "_blank" : "_self"}
-            rel={gmapsUrl ? "noopener noreferrer" : ""}
+            href={doctor.gmapsUrl || '#'}
+            target={doctor.gmapsUrl ? "_blank" : "_self"}
+            rel={doctor.gmapsUrl ? "noopener noreferrer" : ""}
             className={`w-full py-3 px-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 group/btn ${
-              gmapsUrl 
+              doctor.gmapsUrl 
                 ? 'bg-gradient-to-r from-[#4F1718] to-[#6B2425] hover:from-[#3a1112] hover:to-[#4a1718] text-white'
-                : isAvailable && isWithinHours
+                : doctor.isAvailable && isWithinHours
                   ? 'bg-gradient-to-r from-[#4F1718] to-[#6B2425] hover:from-[#3a1112] hover:to-[#4a1718] text-white'
                   : 'bg-gray-200 text-gray-500 cursor-not-allowed'
             }`}
-            onClick={!gmapsUrl && (!isAvailable || !isWithinHours) ? (e) => e.preventDefault() : undefined}
+            onClick={!doctor.gmapsUrl && (!doctor.isAvailable || !isWithinHours) ? (e) => e.preventDefault() : undefined}
           >
             <span>
-              {gmapsUrl 
+              {doctor.gmapsUrl 
                 ? 'Lihat di Google Maps'
-                : !isAvailable 
+                : !doctor.isAvailable 
                   ? 'Belum Tersedia' 
                   : !isWithinHours 
                     ? 'Di Luar Jam Operasi' 
                     : 'Kontak Dokter'
               }
             </span>
-            {(gmapsUrl || (isAvailable && isWithinHours)) && (
+            {(doctor.gmapsUrl || (doctor.isAvailable && isWithinHours)) && (
               <FaChevronRight className="text-sm transition-transform duration-200 group-hover/btn:translate-x-1" />
             )}
           </a>

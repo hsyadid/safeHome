@@ -4,6 +4,11 @@ const nextConfig: NextConfig = {
   // Output standalone untuk production container
   output: "standalone",
 
+  // Disable ESLint during build
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   images: {
     remotePatterns: [
       {

@@ -1,7 +1,6 @@
 'use client'
 import Image from "next/image"
 import logo from "../../../public/logo anara.png"
-import userImg from "../../../public/user.png"
 import { FaChevronDown } from "react-icons/fa";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -101,10 +100,7 @@ export const Navbar = () => {
     }, 300); // Match transition duration
   };
 
-  const handleLogout = () => {
-    logout();
-    window.location.href = '/';
-  };
+
 
   const handleRestrictedNavigation = (path: string) => {
     setIsModalOpen(false);

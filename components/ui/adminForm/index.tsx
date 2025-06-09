@@ -1,13 +1,31 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import { MdClose, MdAdd, MdEdit, MdLocationOn, MdEmail, MdPhone, MdSchedule, MdAccessTime } from 'react-icons/md';
+import { MdClose, MdAdd, MdEdit, MdLocationOn, MdEmail, MdPhone } from 'react-icons/md';
+
+// Define proper TypeScript interfaces
+interface AdminFormData {
+  name?: string;
+  phone?: string;
+  email?: string;
+  imageUrl?: string;
+  address?: string;
+  latitude?: number;
+  longitude?: number;
+  gmapsUrl?: string;
+  title?: string;
+  type?: string;
+  thumbnail?: string;
+  content?: string;
+  summary?: string;
+  videoUrl?: string;
+  duration?: number;
+}
 
 interface AdminFormProps {
   onClose: () => void;
-  onSubmit: (data: any) => void;
-  type: 'serviceLocation' | 'doctor' | 'lawFirm' | 'content';
-  initialData?: any;
+  onSubmit: (data: AdminFormData) => Promise<void>;
+  type: string;
+  initialData?: AdminFormData | null;
   isEdit?: boolean;
 }
 
@@ -18,7 +36,7 @@ const AdminForm: React.FC<AdminFormProps> = ({
   initialData, 
   isEdit = false 
 }) => {
-  const [formData, setFormData] = useState<any>({});
+  const [formData, setFormData] = useState<AdminFormData>({});
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -40,8 +58,8 @@ const AdminForm: React.FC<AdminFormProps> = ({
             address: '',
             phone: '',
             email: '',
-            latitude: '',
-            longitude: '',
+            latitude: 0,
+            longitude: 0,
             imageUrl: '',
             gmapsUrl: ''
           });
@@ -70,7 +88,7 @@ const AdminForm: React.FC<AdminFormProps> = ({
             type: 'ARTICLE',
             thumbnail: '',
             videoUrl: '',
-            duration: '',
+            duration: 0,
             content: '',
             summary: ''
           });
@@ -81,9 +99,11 @@ const AdminForm: React.FC<AdminFormProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type: inputType } = e.target;
-    setFormData((prev: any) => ({
+    setFormData((prev: AdminFormData) => ({
       ...prev,
-      [name]: inputType === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+      [name]: inputType === 'checkbox' ? (e.target as HTMLInputElement).checked : 
+              (name === 'latitude' || name === 'longitude' || name === 'duration') ? 
+              (value ? parseFloat(value) : 0) : value
     }));
   };
 

@@ -7,8 +7,19 @@ import Dropdown from "../dropdown"
 import { useAuth } from "../../../lib/auth"
 
 interface ForumPostModalProps {
+  profileUrl: string;
   onClose: () => void;
-  onSubmit: (postData: any) => void;
+  onPostSubmit?: (data: PostData) => void;
+}
+
+interface PostData {
+  text: string;
+  visibility: string;
+  isAnonymous: boolean;
+  role: string;
+  userId?: number;
+  profileUrl: string;
+  name?: string;
 }
 
 const optionsVisibility = [
@@ -48,9 +59,8 @@ const optionsRole = [
 ];
 
 
-export default function ForumPostModal({onClose, onSubmit}: ForumPostModalProps) {
+export default function ForumPostModal({onClose, onPostSubmit}: ForumPostModalProps) {
   const { user, isAdmin } = useAuth();
-  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
   const [postContent, setPostContent] = useState("");
   const [selectedVisibility, setSelectedVisibility] = useState(optionsVisibility[0].value);
   const [selectedRole, setSelectedRole] = useState(optionsRole[0].value);
@@ -89,7 +99,7 @@ export default function ForumPostModal({onClose, onSubmit}: ForumPostModalProps)
     };
     
     // Submit the post data
-    onSubmit(postData);
+    onPostSubmit?.(postData);
   };
 
   return(
