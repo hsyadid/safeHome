@@ -18,7 +18,27 @@ export function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [previewImage, setPreviewImage] = useState(user?.profilePhoto || '');
+  const [previewImage, setPreviewImage] = useState(user?.profilePhoto && user.profilePhoto !== '' ? user.profilePhoto : '');
+  const [hasRemovedPhoto, setHasRemovedPhoto] = useState(false);
+
+  // Function to get user initials
+  const getUserInitials = (name: string) => {
+    if (!name) return 'U';
+    return name.charAt(0).toUpperCase();
+  };
+
+  // Function to generate background color based on username
+  const getAvatarColor = (name: string) => {
+    const colors = [
+      'bg-purple-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500',
+      'bg-red-500', 'bg-indigo-500', 'bg-pink-500', 'bg-teal-500'
+    ];
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return colors[Math.abs(hash) % colors.length];
+  };
 
   const handleImageClick = () => {
     fileInputRef.current?.click();
@@ -31,8 +51,17 @@ export function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreviewImage(reader.result as string);
+        setHasRemovedPhoto(false);
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handleRemovePhoto = () => {
+    setPreviewImage('');
+    setHasRemovedPhoto(true);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
     }
   };
 
@@ -59,6 +88,8 @@ export function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
       if (newPassword) formData.append('newPassword', newPassword);
       if (fileInputRef.current?.files?.[0]) {
         formData.append('profilePhoto', fileInputRef.current.files[0]);
+      } else if (hasRemovedPhoto) {
+        formData.append('removePhoto', 'true');
       }
 
       const response = await fetch('/api/user/profile', {
@@ -119,19 +150,45 @@ export function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
                   {/* Profile Photo */}
                   <div className="flex flex-col items-center">
                     <div 
-                      className="relative w-24 h-24 cursor-pointer"
+                      className="relative w-24 h-24 cursor-pointer group"
                       onClick={handleImageClick}
                     >
-                      <Image
-                        src={previewImage}
-                        alt="Profile"
-                        fill
-                        className="rounded-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-black bg-opacity-40 rounded-full flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                        <span className="text-white text-sm">Ubah Foto</span>
+                      {previewImage && !hasRemovedPhoto ? (
+                        <Image
+                          src={previewImage}
+                          alt="Profile"
+                          fill
+                          className="rounded-full object-cover"
+                        />
+                      ) : (
+                        <div className={`w-24 h-24 rounded-full flex items-center justify-center text-white text-2xl font-bold ${getAvatarColor(username || user?.username || 'User')}`}>
+                          {getUserInitials(username || user?.username || 'User')}
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-black bg-opacity-40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span className="text-white text-sm font-medium">Ubah Foto</span>
                       </div>
                     </div>
+                    
+                    <div className="flex items-center gap-2 mt-3">
+                      <button
+                        type="button"
+                        onClick={handleImageClick}
+                        className="px-3 py-1 text-xs bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                      >
+                        Pilih Foto
+                      </button>
+                      {(previewImage && !hasRemovedPhoto) && (
+                        <button
+                          type="button"
+                          onClick={handleRemovePhoto}
+                          className="px-3 py-1 text-xs bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                        >
+                          Hapus
+                        </button>
+                      )}
+                    </div>
+                    
                     <input
                       type="file"
                       ref={fileInputRef}

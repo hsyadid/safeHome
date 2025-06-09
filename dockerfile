@@ -2,14 +2,21 @@ FROM node:18-alpine
 
 WORKDIR /app
 
+# Copy package files
 COPY package*.json ./
+COPY pnpm-lock.yaml ./
 
-RUN npm install
+# Install dependencies
+RUN npm install -g pnpm
+RUN pnpm install
 
+# Copy source code
 COPY . .
 
-RUN npm run build
+# Generate Prisma client if needed
+# RUN npx prisma generate
 
 EXPOSE 3000
 
-CMD ["npm", "run", "dev"]
+# Use development mode
+CMD ["pnpm", "run", "dev"]

@@ -290,7 +290,7 @@ export default function ProfilePage() {
                 </svg>
               </div>
               <div>
-                <span className="font-medium text-lg">{user.username}</span>
+                <span className="font-medium text-lg text-left">{user.username}</span>
                 <p className="text-sm text-white/60 text-left">{allActivity.length} aktivitas</p>
               </div>
             </button>

@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image";
-import { MdLocationOn, MdPhone, MdEmail, MdAccessTime } from "react-icons/md";
+import { MdPhone, MdEmail, MdAccessTime } from "react-icons/md";
 import { FaChevronRight, FaUserMd } from "react-icons/fa";
 import { DEFAULT_IMAGES } from "@/../lib/constants";
 import { useEffect, useState } from "react";
