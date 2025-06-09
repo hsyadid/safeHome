@@ -1,22 +1,67 @@
-FROM node:18-alpine
+# ==================================================================================
+# DOCKERFILE PRODUCTION - OPTIMIZED NEXTJS BUILD
+# ==================================================================================
 
+# Base image untuk dependencies
+FROM node:18-alpine AS deps
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
-COPY pnpm-lock.yaml ./
-
-# Install dependencies
+# Copy package files dan install dependencies
+COPY package.json pnpm-lock.yaml* ./
 RUN npm install -g pnpm
-RUN pnpm install
+RUN pnpm install --frozen-lockfile --prod
 
-# Copy source code
+# ==================================================================================
+# BUILDER STAGE - Build aplikasi
+# ==================================================================================
+FROM node:18-alpine AS builder
+WORKDIR /app
+
+# Copy node_modules dari deps stage
+COPY --from=deps /app/node_modules ./node_modules
+
+# Copy semua source code
 COPY . .
 
-# Generate Prisma client if needed
-# RUN npx prisma generate
+# Install pnpm dan build aplikasi
+RUN npm install -g pnpm
 
+# Disable telemetry
+ENV NEXT_TELEMETRY_DISABLED 1
+
+# Build aplikasi NextJS
+RUN pnpm run build
+
+# ==================================================================================
+# RUNNER STAGE - Production runtime
+# ==================================================================================
+FROM node:18-alpine AS runner
+WORKDIR /app
+
+# Set environment production
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+
+# Buat user non-root untuk security
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copy public folder
+COPY --from=builder /app/public ./public
+
+# Copy next.js build output
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+# Switch ke user non-root
+USER nextjs
+
+# Expose port
 EXPOSE 3000
 
-# Use development mode
-CMD ["pnpm", "run", "dev"]
+ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
+
+# Start aplikasi
+CMD ["node", "server.js"] 
