@@ -10,7 +10,8 @@ WORKDIR /app
 # Copy package files dan install dependencies
 COPY package.json pnpm-lock.yaml* ./
 RUN npm install -g pnpm
-RUN pnpm install --frozen-lockfile --prod
+# Install ALL dependencies (including dev deps for build)
+RUN pnpm install --frozen-lockfile
 
 # ==================================================================================
 # BUILDER STAGE - Build aplikasi
@@ -24,11 +25,11 @@ COPY --from=deps /app/node_modules ./node_modules
 # Copy semua source code
 COPY . .
 
-# Install pnpm dan build aplikasi
+# Install pnpm
 RUN npm install -g pnpm
 
 # Disable telemetry
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Build aplikasi NextJS
 RUN pnpm run build
@@ -40,8 +41,8 @@ FROM node:18-alpine AS runner
 WORKDIR /app
 
 # Set environment production
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Buat user non-root untuk security
 RUN addgroup --system --gid 1001 nodejs
@@ -60,8 +61,8 @@ USER nextjs
 # Expose port
 EXPOSE 3000
 
-ENV PORT 3000
-ENV HOSTNAME "0.0.0.0"
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 
 # Start aplikasi
 CMD ["node", "server.js"] 
