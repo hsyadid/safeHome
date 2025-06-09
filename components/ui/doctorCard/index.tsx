@@ -1,32 +1,54 @@
 "use client"
 
 import Image from "next/image";
-import { MdAccessTime } from "react-icons/md";
+import { MdLocationOn, MdPhone, MdEmail, MdAccessTime } from "react-icons/md";
+import { FaChevronRight, FaUserMd } from "react-icons/fa";
+import { DEFAULT_IMAGES } from "@/../lib/constants";
 import { useEffect, useState } from "react";
+import { useAuth } from "@/../lib/auth";
+import AdminActions from "@/../components/ui/adminActions";
 
 interface DoctorCardProps {
+  id?: number;
   name: string;
-  specialty: string;
+  specialty?: string;
+  phone?: string;
+  email?: string;
   imageUrl: string;
-  startTime: Date;
-  endTime: Date;
+  startTime?: Date;
+  endTime?: Date;
+  gmapsUrl?: string;
   isAvailable?: boolean;
   className?: string;
+  onEdit?: (doctor: any) => void;
+  onDelete?: (id: number) => void;
 }
 
 export const DoctorCard = ({
+  id,
   name,
   specialty,
+  phone,
+  email,
   imageUrl,
   startTime,
   endTime,
+  gmapsUrl,
   isAvailable = true,
-  className
+  className,
+  onEdit,
+  onDelete
 }: DoctorCardProps) => {
   const [isWithinHours, setIsWithinHours] = useState(false);
+  const { isAdmin } = useAuth();
 
   useEffect(() => {
     const checkOperatingHours = () => {
+      if (!startTime || !endTime) {
+        setIsWithinHours(true); // Default to available if no time specified
+        return;
+      }
+      
       const now = new Date();
       const currentHour = now.getHours();
       const currentMinute = now.getMinutes();
@@ -62,41 +84,141 @@ export const DoctorCard = ({
     });
   };
 
+  const truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + '...';
+  };
+
   return (
-    <div className={`bg-white rounded-[20px] p-4 shadow-sm w-full border-2 border-solid border-[##D5D3D4] ${className}`}>
-      <div className="space-y-4">
-        <div className="w-full h-[200px] relative rounded-[15px] overflow-hidden">
-          <Image 
-            src={imageUrl}
-            alt={name}
-            fill
-            className="object-cover"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <h3 className="font-jakarta font-semibold text-lg">{name}</h3>
-          <p className="text-gray-600 text-sm">{specialty}</p>
-          
-          <div className="flex items-center gap-2 text-sm text-gray-500">
-            <MdAccessTime />
-            <span>{formatTime(startTime)} - {formatTime(endTime)}</span>
+    <div className={`group bg-[#f0eee4] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-[#4F1718]/20 transform hover:-translate-y-1 h-[480px] flex flex-col ${className}`}>
+      {/* Image Container with Overlay */}
+      <div className="aspect-[4/3] relative overflow-hidden flex-shrink-0">
+        <Image 
+          src={imageUrl || DEFAULT_IMAGES.PSIKOLOG}
+          alt={name}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        
+        {/* Admin Actions */}
+        {isAdmin && (
+          <div className="absolute top-3 left-3">
+            <AdminActions
+              onEdit={() => onEdit?.({ id, name, specialty, phone, email, imageUrl, startTime, endTime, gmapsUrl, isAvailable })}
+              onDelete={() => onDelete?.(id!)}
+              itemType="dokter"
+              className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            />
           </div>
+        )}
+
+            
+      </div>
+
+      {/* Content Container */}
+      <div className="p-5 space-y-4 flex-1 flex flex-col">
+        {/* Title - Fixed height for 2 lines */}
+        <div className="h-12"> {/* Fixed height to accommodate 2 lines */}
+          <h3 
+            className="font-jakarta font-bold text-lg text-gray-900 leading-tight group-hover:text-[#4F1718] transition-colors duration-200 line-clamp-2 text-left" 
+            title={name}
+            style={{
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden'
+            }}
+          >
+            {name}
+          </h3>
+        </div>
+        
+        {/* Contact Information */}
+        <div className="space-y-3 flex-1">
+          {specialty && (
+            <div className="flex gap-3 items-start">
+              <div className="bg-blue-50 rounded-lg p-2 flex-shrink-0">
+                <FaUserMd className="text-blue-500 text-sm" />
+              </div>
+              <div className="flex-1 h-10"> {/* Fixed height for 2 lines */}
+                <p 
+                  className="text-sm text-gray-600 leading-relaxed line-clamp-2" 
+                  title={specialty}
+                  style={{
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden'
+                  }}
+                >
+                  {specialty}
+                </p>
+              </div>
+            </div>
+          )}
+          
+          {phone && (
+            <div className="flex gap-3 items-center">
+              <div className="bg-green-50 rounded-lg p-2 flex-shrink-0">
+                <MdPhone className="text-green-500 text-sm" />
+              </div>
+              <p className="text-sm text-gray-600 font-medium">{phone}</p>
+            </div>
+          )}
+          
+          <div className="flex gap-3 items-center">
+            <div className="bg-red-50 rounded-lg p-2 flex-shrink-0">
+              <MdEmail className="text-red-500 text-sm" />
+            </div>
+            <p className="text-sm text-gray-600 flex-1" title={email || '-'}>
+              {email && email !== '-' ? truncateText(email, 25) : '-'}
+            </p>
+          </div>
+
+          {startTime && endTime && (
+            <div className="flex gap-3 items-center">
+              <div className="bg-purple-50 rounded-lg p-2 flex-shrink-0">
+                <MdAccessTime className="text-purple-500 text-sm" />
+              </div>
+              <p className="text-sm text-gray-600">
+                {formatTime(startTime)} - {formatTime(endTime)}
+              </p>
+            </div>
+          )}
         </div>
 
-        <button 
-          className={`w-full py-2 px-4 rounded-[10px] font-medium text-sm
-            ${isAvailable && isWithinHours
-              ? 'bg-button text-white hover:bg-opacity-90' 
-              : 'bg-gray-100 text-gray-500 cursor-not-allowed'}`}
-          disabled={!isAvailable || !isWithinHours}
-        >
-          {!isAvailable 
-            ? 'Belum Tersedia' 
-            : !isWithinHours 
-              ? 'Di Luar Jam Operasi' 
-              : 'Kontak'}
-        </button>
+        {/* Action Button */}
+        <div className="pt-2 mt-auto">
+          <a 
+            href={gmapsUrl || '#'}
+            target={gmapsUrl ? "_blank" : "_self"}
+            rel={gmapsUrl ? "noopener noreferrer" : ""}
+            className={`w-full py-3 px-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 group/btn ${
+              gmapsUrl 
+                ? 'bg-gradient-to-r from-[#4F1718] to-[#6B2425] hover:from-[#3a1112] hover:to-[#4a1718] text-white'
+                : isAvailable && isWithinHours
+                  ? 'bg-gradient-to-r from-[#4F1718] to-[#6B2425] hover:from-[#3a1112] hover:to-[#4a1718] text-white'
+                  : 'bg-gray-200 text-gray-500 cursor-not-allowed'
+            }`}
+            onClick={!gmapsUrl && (!isAvailable || !isWithinHours) ? (e) => e.preventDefault() : undefined}
+          >
+            <span>
+              {gmapsUrl 
+                ? 'Lihat di Google Maps'
+                : !isAvailable 
+                  ? 'Belum Tersedia' 
+                  : !isWithinHours 
+                    ? 'Di Luar Jam Operasi' 
+                    : 'Kontak Dokter'
+              }
+            </span>
+            {(gmapsUrl || (isAvailable && isWithinHours)) && (
+              <FaChevronRight className="text-sm transition-transform duration-200 group-hover/btn:translate-x-1" />
+            )}
+          </a>
+        </div>
       </div>
     </div>
   );

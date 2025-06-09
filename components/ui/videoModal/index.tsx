@@ -1,5 +1,17 @@
-import { ContentItem } from "../../../data/content";
 import { IoClose } from "react-icons/io5";
+
+interface ContentItem {
+  id: number;
+  title: string;
+  type: 'ARTICLE' | 'VIDEO';
+  thumbnail: string;
+  createdAt: string;
+  updatedAt: string;
+  content?: string;
+  summary?: string;
+  videoUrl?: string;
+  duration?: number;
+}
 
 interface VideoModalProps {
   video: ContentItem;

@@ -3,34 +3,42 @@ import { FaChevronRight } from "react-icons/fa";
 
 
 interface NewsCardProps {
+  imageUrl: string;
   title: string;
-  image: string;
+  description: string;
   className?: string;
 }
 
 export const NewsCard = ({
+  imageUrl,
   title,
-  image,
+  description,
   className
 }: NewsCardProps) => {
   return (
-    <div className={`h-[380px] bg-white rounded-[20px] border-[1px] border-solid border-rose-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow ${className}`}>
-      <div className="w-full h-[200px] relative">
+    <div className={`h-[380px] bg-[#f0eee4] rounded-[20px] border-[1px] border-solid border-rose-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow ${className}`}>
+      <div className="h-[190px] w-full relative">
         <Image 
-          src={image}
+          src={imageUrl}
           alt={title}
           fill
           className="object-cover"
         />
       </div>
 
-      <div className="p-4 space-y-3  h-full flex flex-col items-start gap-3 pt-10 ">
-        <h3 className="font-jakarta font-semibold text-lg line-clamp-2">
-          {title}
-        </h3>
+      <div className="p-4 flex flex-col h-[190px] justify-between">
+        <div>
+          <h3 className="font-jakarta font-semibold text-lg mb-2 line-clamp-2">
+            {title}
+          </h3>
+          <p className="font-jakarta text-gray-600 text-sm line-clamp-3">
+            {description}
+          </p>
+        </div>
         
-        <button className="text-primary font-jakarta text-sm hover:underline flex justify-center items-center gap-2">
-          Baca Lebih Lanjut <FaChevronRight className="text-xs" />
+        <button className="flex items-center gap-2 text-[#4F1718] font-medium text-sm hover:gap-3 transition-all duration-200 mt-4">
+          Baca Selengkapnya
+          <FaChevronRight className="text-xs" />
         </button>
       </div>
     </div>

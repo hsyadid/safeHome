@@ -1,7 +1,7 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 // Tipe data untuk user
 type User = {
@@ -9,6 +9,7 @@ type User = {
   username: string;
   email: string;
   role: string;
+  profilePhoto?: string;
 };
 
 // Tipe data untuk auth store
@@ -21,37 +22,59 @@ type AuthStore = {
   logout: () => void;
 };
 
-// Fungsi untuk login
+// Fungsi untuk login (step 1: request 2FA code)
 export async function loginUser(username: string, password: string) {
   const response = await fetch(`${API_URL}/auth/login`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ username, password }),
   });
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(error.message || 'Login gagal');
+    throw new Error(error.message || "Login failed");
+  }
+
+  return response.json();
+}
+
+// Fungsi untuk verifikasi 2FA
+export async function verify2FA(userId: string, email: string, code: string) {
+  const response = await fetch(`${API_URL}/auth-v2/verify-2fa`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ userId, email, code }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || "Verifikasi gagal");
   }
 
   return response.json();
 }
 
 // Fungsi untuk register
-export async function registerUser(username: string, password: string, email: string) {
-  const response = await fetch(`${API_URL}/auth/register`, {
-    method: 'POST',
+export async function registerUser(
+  username: string,
+  password: string,
+  email: string
+) {
+  const response = await fetch(`${API_URL}/auth-v2/register`, {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ username, password, email }),
   });
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(error.message || 'Registrasi gagal');
+    throw new Error(error.message || "Registrasi gagal");
   }
 
   return response.json();
@@ -65,24 +88,23 @@ export const useAuth = create<AuthStore>()(
       token: null,
       isAuthenticated: false,
       isAdmin: false,
-      login: (user, token) => set({ 
-        user, 
-        token, 
-        isAuthenticated: true,
-        isAdmin: user.role === 'admin'
-      }),
-      logout: () => set({ 
-        user: null, 
-        token: null, 
-        isAuthenticated: false,
-        isAdmin: false
-      }),
+      login: (user, token) =>
+        set({
+          user,
+          token,
+          isAuthenticated: true,
+          isAdmin: user.role === "admin",
+        }),
+      logout: () =>
+        set({
+          user: null,
+          token: null,
+          isAuthenticated: false,
+          isAdmin: false,
+        }),
     }),
     {
-      name: 'auth-storage', 
+      name: "auth-storage",
     }
   )
 );
-
-
-
