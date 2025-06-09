@@ -32,7 +32,7 @@ export const DampingSetara = () => {
   const fetchDoctors = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch('https://safehomeanara.id/doctors');
+      const response = await fetch('https://safehomeanara.id/api/doctors');
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
@@ -87,7 +87,7 @@ export const DampingSetara = () => {
   const handleDeleteDoctor = async (id: number) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus psikolog ini?')) {
       try {
-        const response = await fetch(`https://safehomeanara.id/doctors/${id}`, {
+        const response = await fetch(`https://safehomeanara.id/api/doctors/${id}`, {
           method: 'DELETE',
         });
         
@@ -118,7 +118,7 @@ export const DampingSetara = () => {
       let response;
       if (editingDoctor) {
         // Update doctor
-        response = await fetch(`https://safehomeanara.id/doctors/${editingDoctor.id}`, {
+        response = await fetch(`https://safehomeanara.id/api/doctors/${editingDoctor.id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -127,7 +127,7 @@ export const DampingSetara = () => {
         });
       } else {
         // Add new doctor  
-        response = await fetch('https://safehomeanara.id/doctors', {
+        response = await fetch('https://safehomeanara.id/api/doctors', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

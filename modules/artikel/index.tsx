@@ -36,7 +36,7 @@ export default function Article({ params }: ArticleProps) {
         setArticleId(parsedId);
 
         // Fetch specific article
-        const articleResponse = await fetch(`https://safehomeanara.id/content/${parsedId}`);
+        const articleResponse = await fetch(`https://safehomeanara.id/api/content/${parsedId}`);
         if (articleResponse.ok) {
           const articleData = await articleResponse.json();
           if (articleData.type === 'ARTICLE') {
@@ -45,7 +45,7 @@ export default function Article({ params }: ArticleProps) {
         }
 
         // Fetch related articles
-        const allContentResponse = await fetch('https://safehomeanara.id/content');
+        const allContentResponse = await fetch('https://safehomeanara.id/api/content');
         if (allContentResponse.ok) {
           const allContent = await allContentResponse.json();
           const related = allContent

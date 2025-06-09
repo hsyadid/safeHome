@@ -32,7 +32,7 @@ export const LayananHukum = () => {
   const fetchLawFirms = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch('https://safehomeanara.id/law-firms');
+      const response = await fetch('https://safehomeanara.id/api/law-firms');
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
@@ -87,7 +87,7 @@ export const LayananHukum = () => {
   const handleDeleteLawFirm = async (id: number) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus lembaga hukum ini?')) {
       try {
-        const response = await fetch(`https://safehomeanara.id/law-firms/${id}`, {
+        const response = await fetch(`https://safehomeanara.id/api/law-firms/${id}`, {
           method: 'DELETE',
         });
         
@@ -116,7 +116,7 @@ export const LayananHukum = () => {
       let response;
       if (editingLawFirm) {
         // Update law firm
-        response = await fetch(`https://safehomeanara.id/law-firms/${editingLawFirm.id}`, {
+        response = await fetch(`https://safehomeanara.id/api/law-firms/${editingLawFirm.id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ export const LayananHukum = () => {
         });
       } else {
         // Add new law firm  
-        response = await fetch('https://safehomeanara.id/law-firms', {
+        response = await fetch('https://safehomeanara.id/api/law-firms', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -45,7 +45,7 @@ export default function Forum() {
   const fetchPosts = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch('https://safehomeanara.id/posts');
+      const response = await fetch('https://safehomeanara.id/api/posts');
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
@@ -121,7 +121,7 @@ export default function Forum() {
   const handleDeletePost = async (postId: number) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus postingan ini?')) {
       try {
-        const response = await fetch(`https://safehomeanara.id/posts/${postId}`, {
+        const response = await fetch(`https://safehomeanara.id/api/posts/${postId}`, {
           method: 'DELETE',
         });
         
@@ -159,7 +159,7 @@ export default function Forum() {
 
       console.log('Sending reply data:', replyData); // Debug log
 
-      const response = await fetch('https://safehomeanara.id/replies', {
+      const response = await fetch('https://safehomeanara.id/api/replies', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -201,7 +201,7 @@ export default function Forum() {
         profileUrl: postData.isAnonymous ? "/user.png" : (user.profilePhoto || "/user.png")
       };
 
-      const response = await fetch('https://safehomeanara.id/posts', {
+      const response = await fetch('https://safehomeanara.id/api/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
