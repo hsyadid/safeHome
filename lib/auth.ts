@@ -22,7 +22,7 @@ type AuthStore = {
   logout: () => void;
 };
 
-// Fungsi untuk login (step 1: request 2FA code)
+// Fungsi untuk login
 export async function loginUser(username: string, password: string) {
   const response = await fetch(`${API_URL}/api/auth/login`, {
     method: "POST",
@@ -37,25 +37,8 @@ export async function loginUser(username: string, password: string) {
     throw new Error(error.message || "Login failed");
   }
 
-  return response.json();
-}
-
-// Fungsi untuk verifikasi 2FA
-export async function verify2FA(userId: string, email: string, code: string) {
-  const response = await fetch(`${API_URL}/auth-v2/verify-2fa`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ userId, email, code }),
-  });
-
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || "Verifikasi gagal");
-  }
-
-  return response.json();
+  const data = await response.json();
+  return data;
 }
 
 // Fungsi untuk register
@@ -64,7 +47,7 @@ export async function registerUser(
   password: string,
   email: string
 ) {
-  const response = await fetch(`${API_URL}/auth-v2/register`, {
+  const response = await fetch(`${API_URL}/api/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -75,6 +58,22 @@ export async function registerUser(
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.message || "Registrasi gagal");
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+// Fungsi untuk get current user
+export async function getCurrentUser(token: string) {
+  const response = await fetch(`${API_URL}/api/auth/me`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to get user info");
   }
 
   return response.json();

@@ -19,4 +19,11 @@ export const ENDPOINTS = {
   USER: {
     UPDATE_PROFILE: `${API_URL}/api/user/profile`,
   },
+  CONTENT: {
+    GET_ALL: `${API_URL}/api/content`,
+    GET_ONE: (id: number) => `${API_URL}/api/content/${id}`,
+    CREATE: `${API_URL}/api/content`,
+    UPDATE: (id: number) => `${API_URL}/api/content/${id}`,
+    DELETE: (id: number) => `${API_URL}/api/content/${id}`,
+  },
 };

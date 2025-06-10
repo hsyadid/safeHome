@@ -5,6 +5,7 @@ import plus from "../../public/plus.svg"
 import InformasiModal from "../../components/ui/informasiModal"
 import { useState, useEffect } from "react"
 import { useAuth } from "../../lib/auth"
+import { ENDPOINTS } from "../../config/api"
 // import { contentData, ContentItem } from "../../data/content"
 
 interface ContentItem {
@@ -41,7 +42,7 @@ export default function() {
   const fetchContents = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch('https://safehomeanara.id/api/content');
+      const response = await fetch(ENDPOINTS.CONTENT.GET_ALL);
       if (!response.ok) throw new Error('Failed to fetch content');
       const data = await response.json();
       setContents(data);
@@ -86,7 +87,7 @@ export default function() {
   const handleDeleteContent = async (id: number) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus konten ini?')) {
       try {
-        const response = await fetch(`https://safehomeanara.id/api/content/${id}`, {
+        const response = await fetch(ENDPOINTS.CONTENT.DELETE(id), {
           method: 'DELETE',
         });
         
@@ -118,7 +119,7 @@ export default function() {
       let response;
       if (editingContent) {
         // Update content
-        response = await fetch(`https://safehomeanara.id/api/content/${editingContent.id}`, {
+        response = await fetch(ENDPOINTS.CONTENT.UPDATE(editingContent.id), {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -127,7 +128,7 @@ export default function() {
         });
       } else {
         // Add new content  
-        response = await fetch('https://safehomeanara.id/api/content', {
+        response = await fetch(ENDPOINTS.CONTENT.CREATE, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

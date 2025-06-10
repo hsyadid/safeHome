@@ -11,7 +11,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml* ./
 RUN npm install -g pnpm
 # Install ALL dependencies (including dev deps for build)
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --no-frozen-lockfile
 
 # ==================================================================================
 # BUILDER STAGE - Build aplikasi
@@ -33,6 +33,14 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 # Build aplikasi NextJS
 RUN pnpm run build
+
+# Debug: List build output untuk memastikan file ada
+RUN echo "=== BUILD OUTPUT DEBUG ===" && \
+    ls -la .next/ && \
+    echo "=== STANDALONE CHECK ===" && \
+    ls -la .next/standalone/ && \
+    echo "=== STATIC CHECK ===" && \
+    ls -la .next/static/
 
 # ==================================================================================
 # RUNNER STAGE - Production runtime
