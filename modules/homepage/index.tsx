@@ -73,7 +73,7 @@ export const Homepage = () => {
 
     return (
         <>
-            <div className="content-container">
+            <div className="content-container overflow-hidden">
                 <div className="w-full h-fit flex flex-col gap-16">
 
                     <div 
