@@ -90,7 +90,7 @@ export const DoctorCard = ({
   };
 
   return (
-    <div className={`group bg-[#f0eee4] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-[#4F1718]/20 transform hover:-translate-y-1 h-[495px] flex flex-col ${className}`}>
+    <div className={`group bg-[#f0eee4] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-[#4F1718]/20 transform hover:-translate-y-1 h-[505px] flex flex-col ${className}`}>
       {/* Image Container with Overlay */}
       <div className="aspect-[4/3] relative overflow-hidden flex-shrink-0">
         <Image 
