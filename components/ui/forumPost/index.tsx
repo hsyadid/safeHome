@@ -255,11 +255,6 @@ const ForumPost = ({
                                 <span className={`px-3 py-1 rounded-full text-sm font-medium shadow-sm ${visibilityStyles[visibility]}`}>
                                     {visibility}
                                 </span>
-                                {user?.role === "admin" && (
-                                    <span className="px-2 py-1 rounded-md text-xs bg-gray-100 text-gray-700 border border-gray-200">
-                                        {isAnonymous ? "Anon" : "Named"}
-                                    </span>
-                                )}
                                 {isAdmin && onDelete && (
                                     <button
                                         onClick={() => onDelete(id)}
