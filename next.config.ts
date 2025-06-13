@@ -13,27 +13,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "lh3.googleusercontent.com",
+        hostname: "**",
       },
       {
-        protocol: "https",
-        hostname: "streetviewpixels-pa.googleapis.com",
-      },
-      {
-        protocol: "https",
-        hostname: "maps.app.goo.gl",
-      },
-      {
-        protocol: "https",
-        hostname: "ui-avatars.com",
-      },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "images.pexels.com",
+        protocol: "http",
+        hostname: "**",
       },
     ],
   },

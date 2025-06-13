@@ -92,7 +92,7 @@ export const Footer = () => {
             
             {/* Copyright */}
             <div className="text-sm text-gray-300 text-center md:text-left">
-              <p>&copy; 2024 Anara.ID - SafeHome. Semua hak dilindungi.</p>
+              <p>&copy; 2025 Anara.ID - SafeHome. Semua hak dilindungi.</p>
               <p className="mt-1">Dibuat dengan ❤️ untuk keamanan dan dukungan komunitas.</p>
             </div>
 
@@ -109,6 +109,20 @@ export const Footer = () => {
               <Image
                 src="/GYM_logo.png"
                 alt="GYM Partner"
+                width={60}
+                height={60}
+                className="object-contain opacity-80 hover:opacity-100 transition-opacity"
+              />
+              <Image
+                src="/Logo-Amartha.png"
+                alt="Amartha Partner"
+                width={60}
+                height={60}
+                className="object-contain opacity-80 hover:opacity-100 transition-opacity"
+              />
+              <Image
+                src="/Artboard.jpg"
+                alt="Artboard Partner"
                 width={60}
                 height={60}
                 className="object-contain opacity-80 hover:opacity-100 transition-opacity"
