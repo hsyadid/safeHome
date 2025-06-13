@@ -104,28 +104,28 @@ export const Footer = () => {
                 alt="EU Funding Partner"
                 width={60}
                 height={60}
-                className="object-contain opacity-80 hover:opacity-100 transition-opacity"
+                className="object-contain opacity-80 hover:opacity-100 transition-opacity w-10 h-10 md:w-15 md:h-15"
               />
               <Image
                 src="/GYM_logo.png"
                 alt="GYM Partner"
                 width={60}
                 height={60}
-                className="object-contain opacity-80 hover:opacity-100 transition-opacity"
+                className="object-contain opacity-80 hover:opacity-100 transition-opacity w-10 h-10 md:w-15 md:h-15"
               />
               <Image
                 src="/Logo-Amartha.png"
                 alt="Amartha Partner"
                 width={60}
                 height={60}
-                className="object-contain opacity-80 hover:opacity-100 transition-opacity"
+                className="object-contain opacity-80 hover:opacity-100 transition-opacity w-10 h-10 md:w-15 md:h-15"
               />
               <Image
                 src="/Artboard.jpg"
                 alt="Artboard Partner"
                 width={60}
                 height={60}
-                className="object-contain opacity-80 hover:opacity-100 transition-opacity"
+                className="object-contain opacity-80 hover:opacity-100 transition-opacity w-10 h-10 md:w-15 md:h-15"
               />
             </div>
 
