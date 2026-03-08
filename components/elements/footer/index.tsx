@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MdLocationOn } from "react-icons/md";
 import { FaInstagram } from "react-icons/fa";
 
 export const Footer = () => {
@@ -35,12 +34,17 @@ export const Footer = () => {
               </li>
               <li>
                 <Link href="/forum" className="hover:text-[#AD8861] transition-colors duration-200">
-                  Forum Diskusi
+                  Damping Setara
                 </Link>
               </li>
               <li>
-                <Link href="/damping-setara" className="hover:text-[#AD8861] transition-colors duration-200">
-                  Damping Setara
+                <Link href="/informasi" className="hover:text-[#AD8861] transition-colors duration-200">
+                  Informasi
+                </Link>
+              </li>
+              <li>
+                <Link href="/about-me" className="hover:text-[#AD8861] transition-colors duration-200">
+                  Tentang Kami
                 </Link>
               </li>
               <li>
@@ -51,36 +55,29 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Information */}
+          {/* Kolaborasi & Contact */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg mb-4">Kontak Kami</h3>
-            <div className="space-y-3 text-sm">
-              {/* Address */}
-              <div className="flex items-start gap-3">
-                <MdLocationOn className="text-[#AD8861] mt-1 flex-shrink-0" size={16} />
-                <div>
-                  <p className="text-gray-300 leading-relaxed">
-                    Jl Mesjid Baru RT 6 RW 1 No 4<br />
-                    Kelurahan Pejaten Timur<br />
-                    Kecamatan Pasar Minggu<br />
-                    Jakarta Selatan
-                  </p>
-                </div>
-              </div>
-
-
-              {/* Instagram */}
-              <div className="flex items-center gap-3">
-                <FaInstagram className="text-[#AD8861] flex-shrink-0" size={16} />
-                <a 
-                  href="https://www.instagram.com/anara__id/" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#AD8861] transition-colors duration-200 text-gray-300"
-                >
-                  @anara__id
-                </a>
-              </div>
+            <h3 className="font-semibold text-lg mb-4">Kolaborasi</h3>
+            <p className="text-sm text-gray-300 leading-relaxed">
+              Berkolaborasi dengan{' '}
+              <a href="https://www.instagram.com/dampingsetara" target="_blank" rel="noopener noreferrer" className="text-[#AD8861] hover:text-white font-semibold transition-colors">
+                DampingSetara
+              </a>{' '}
+              dan{' '}
+              <a href="https://www.instagram.com/tasturamengajar/" target="_blank" rel="noopener noreferrer" className="text-[#AD8861] hover:text-white font-semibold transition-colors">
+                Tastura Mengajar
+              </a>
+            </p>
+            <div className="flex items-center gap-3 pt-2">
+              <FaInstagram className="text-[#AD8861] flex-shrink-0" size={16} />
+              <a 
+                href="https://www.instagram.com/anara__id/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#AD8861] transition-colors duration-200 text-gray-300 text-sm"
+              >
+                @anara__id
+              </a>
             </div>
           </div>
 
@@ -88,7 +85,7 @@ export const Footer = () => {
 
         {/* Bottom Section */}
         <div className="border-t border-gray-600 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             
             {/* Copyright */}
             <div className="text-sm text-gray-300 text-center md:text-left">
@@ -96,37 +93,35 @@ export const Footer = () => {
               <p className="mt-1">Dibuat dengan ❤️ untuk keamanan dan dukungan komunitas.</p>
             </div>
 
-            {/* Partner Logos */}
-            <div className="flex items-center gap-6">
-              <div className="text-xs text-gray-400 mr-2">Didukung oleh:</div>
-              <Image
-                src="/EU_funding_logo.png"
-                alt="EU Funding Partner"
-                width={60}
-                height={60}
-                className="object-contain opacity-80 hover:opacity-100 transition-opacity w-10 h-10 md:w-15 md:h-15"
-              />
-              <Image
-                src="/GYM_logo.png"
-                alt="GYM Partner"
-                width={60}
-                height={60}
-                className="object-contain opacity-80 hover:opacity-100 transition-opacity w-10 h-10 md:w-15 md:h-15"
-              />
-              <Image
-                src="/Logo-Amartha.png"
-                alt="Amartha Partner"
-                width={60}
-                height={60}
-                className="object-contain opacity-80 hover:opacity-100 transition-opacity w-10 h-10 md:w-15 md:h-15"
-              />
-              <Image
-                src="/Artboard.jpg"
-                alt="Artboard Partner"
-                width={60}
-                height={60}
-                className="object-contain opacity-80 hover:opacity-100 transition-opacity w-10 h-10 md:w-15 md:h-15"
-              />
+            {/* Partner Logos - Horizontal layout */}
+            <div className="flex items-center gap-8 flex-wrap justify-center">
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-gray-400">Funded by:</span>
+                <Image
+                  src="/EU_funding_logo.png"
+                  alt="European Union"
+                  width={60}
+                  height={60}
+                  className="object-contain opacity-80 hover:opacity-100 transition-opacity w-10 h-10 md:w-15 md:h-15"
+                />
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-gray-400">Didukung oleh:</span>
+                <Image
+                  src="/Logo-Amartha.png"
+                  alt="Amartha"
+                  width={60}
+                  height={60}
+                  className="object-contain opacity-80 hover:opacity-100 transition-opacity w-10 h-10 md:w-15 md:h-15"
+                />
+                <Image
+                  src="/Artboard.jpg"
+                  alt="DPIS UI"
+                  width={60}
+                  height={60}
+                  className="object-contain opacity-80 hover:opacity-100 transition-opacity w-10 h-10 md:w-15 md:h-15"
+                />
+              </div>
             </div>
 
           </div>

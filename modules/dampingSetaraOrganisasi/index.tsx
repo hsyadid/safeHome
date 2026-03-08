@@ -36,6 +36,7 @@ export const LayananHukum = () => {
   const [editingLawFirm, setEditingLawFirm] = useState<LawFirm | null>(null);
   const [lawFirms, setLawFirms] = useState<LawFirm[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [showInfoModal, setShowInfoModal] = useState(true);
   const { isAdmin } = useAuth();
 
   // Fetch data from backend
@@ -190,7 +191,7 @@ export const LayananHukum = () => {
               </div>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-jakarta text-white mb-6 drop-shadow-lg">
-              Damping Setara Hukum
+              Kontak Hukum
             </h1>
             <p className="text-lg sm:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
               Temukan lembaga bantuan hukum terpercaya yang siap membantu Anda mendapatkan keadilan dan perlindungan hukum yang layak
@@ -309,6 +310,32 @@ export const LayananHukum = () => {
           initialData={convertToFormData(editingLawFirm)}
           isEdit={!!editingLawFirm}
         />
+      )}
+
+      {/* Info Modal on Page Load */}
+      {showInfoModal && (
+        <>
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999]" onClick={() => setShowInfoModal(false)} />
+          <div className="fixed inset-0 z-[10000] flex items-center justify-center px-4">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 transform animate-in">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-3xl">🔔</span>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3 font-jakarta">Informasi</h3>
+                <p className="text-gray-600 font-jakarta leading-relaxed">
+                  Saat ini kerjasama masih dalam pengembangan kolaborasi. Berikut merupakan rekomendasi layanan hukum yang dapat Anda hubungi.
+                </p>
+                <button
+                  onClick={() => setShowInfoModal(false)}
+                  className="mt-6 bg-gradient-to-r from-[#4F1718] to-[#6B2425] text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-200 font-jakarta"
+                >
+                  Mengerti
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );

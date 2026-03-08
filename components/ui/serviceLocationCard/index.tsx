@@ -43,7 +43,7 @@ export const ServiceLocationCard = ({
       {/* Image Container with Overlay */}
       <div className="aspect-[4/3] relative overflow-hidden flex-shrink-0">
         <Image 
-          src={imageUrl}
+          src={imageUrl?.trimEnd()}
           alt={name}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"

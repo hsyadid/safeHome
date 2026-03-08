@@ -94,7 +94,7 @@ export const DoctorCard = ({
       {/* Image Container with Overlay */}
       <div className="aspect-[4/3] relative overflow-hidden flex-shrink-0">
         <Image 
-          src={imageUrl || DEFAULT_IMAGES.PSIKOLOG}
+          src={(imageUrl || DEFAULT_IMAGES.PSIKOLOG).trimEnd()}
           alt={name}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"

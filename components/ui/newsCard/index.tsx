@@ -19,7 +19,7 @@ export const NewsCard = ({
     <div className={`h-[380px] bg-[#f0eee4] rounded-[20px] border-[1px] border-solid border-rose-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow ${className}`}>
       <div className="h-[190px] w-full relative">
         <Image 
-          src={imageUrl}
+          src={imageUrl?.trimEnd()}
           alt={title}
           fill
           className="object-cover"

@@ -269,7 +269,7 @@ export default function() {
                         <div className="flex flex-col md:flex-row">
                           <div className="relative md:w-1/2 aspect-[16/9] md:aspect-[4/3] overflow-hidden">
                             <Image 
-                              src={article.thumbnail || DEFAULT_IMAGES.INFORMASI} 
+                              src={(article.thumbnail || DEFAULT_IMAGES.INFORMASI).trimEnd()} 
                               alt={article.title}
                               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                               width={100}
@@ -341,7 +341,7 @@ export default function() {
                       <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/20 overflow-hidden transform hover:-translate-y-2">
                         <div className="relative aspect-[16/9] overflow-hidden">
                           <Image 
-                            src={article.thumbnail || DEFAULT_IMAGES.INFORMASI} 
+                            src={(article.thumbnail || DEFAULT_IMAGES.INFORMASI).trimEnd()} 
                             alt={article.title}
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                             width={100}
@@ -416,7 +416,7 @@ export default function() {
                     <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/20 overflow-hidden transform hover:-translate-y-2 h-full flex flex-col">
                       <div className="relative aspect-[4/3] overflow-hidden">
                         <Image 
-                          src={article.thumbnail || DEFAULT_IMAGES.INFORMASI} 
+                          src={(article.thumbnail || DEFAULT_IMAGES.INFORMASI).trimEnd()} 
                           alt={article.title}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           width={100}

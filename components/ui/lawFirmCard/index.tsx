@@ -35,7 +35,7 @@ const LawFirmCard: React.FC<LawFirmCardProps> = ({ lawFirm, onEdit, onDelete }) 
       {/* Image Container with Overlay */}
       <div className="aspect-[4/3] relative overflow-hidden flex-shrink-0">
         <Image 
-          src={lawFirm.imageUrl || DEFAULT_IMAGES.HUKUM}
+          src={(lawFirm.imageUrl || DEFAULT_IMAGES.HUKUM).trimEnd()}
           alt={lawFirm.name}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
